@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
-from loan_helper.models import Client
+from loan_helper.models import Client, Broker
 
 
 class IndexView(View):
@@ -14,6 +14,11 @@ class IndexView(View):
 class ClientCreate(CreateView):
     model = Client
     fields = '__all__'
-    success_url = reverse_lazy('/client/')
+    exclude = ['news']
+    success_url = reverse_lazy('')
 
 
+class BrokerCreate(CreateView):
+    model = Broker
+    fields = '__all__'
+    success_url = reverse_lazy('')

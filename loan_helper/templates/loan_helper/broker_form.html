@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Broker</title>
+</head>
+<body>
+<h1>Add Broker</h1>
+<form method="post">{% csrf_token %}
+    {{ form.as_ul }}
+    <input type="submit" value="Add">
+</form>
+</body>
+</html>

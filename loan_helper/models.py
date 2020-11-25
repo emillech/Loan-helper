@@ -31,26 +31,32 @@ class Client(models.Model):
     marital_status = models.IntegerField(choices=MARITAL_STATUS)
     address = models.CharField(max_length=128, null=True)
     broker = models.ForeignKey('Broker', on_delete=models.CASCADE)
-    news = models.ForeignKey('Comment', on_delete=models.CASCADE)
+    news = models.ForeignKey('Comment', on_delete=models.CASCADE, null=True)
     current_status = models.IntegerField(choices=CURRENT_STATUS)
     date_created = models.DateField(auto_now_add=True, null=True)
-    income = models.ManyToManyField('Occupation', through='ClientOccupation')
+    income = models.ManyToManyField('Occupation', through='ClientOccupation', null=True)
 
 
 class Occupation(models.Model):
     occupation = models.IntegerField(choices=OCCUPATION)
 
+    def __str__(self):
+        return self.get_occupation_display()
+
 
 class ClientOccupation(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     occupation = models.ForeignKey(Occupation, on_delete=models.CASCADE)
-    monthly_income = models.IntegerField()
+    monthly_income = models.IntegerField(null=True)
 
 
 class Broker(models.Model):
     name = models.CharField(max_length=128)
     phone_number = models.IntegerField()
     email = models.EmailField(null=True)
+
+    def __str__(self):
+        return self.name
 
 
 class SuccessfulLoan(models.Model):
@@ -66,3 +72,6 @@ class Bank(models.Model):
 
 class Comment(models.Model):
     text = models.TextField(null=True)
+
+    def __str__(self):
+        return self.text
