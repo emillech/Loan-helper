@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Client Details</title>
+</head>
+<body>
+
+ <table style="width:100%">
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Phone Number</th>
+    <th>Email</th>
+    <th>Marital Status</th>
+    <th>Address</th>
+    <th>Income <a href="/add_income/{{ client.id }}"> <input type="button" value="Add Income"></a></th>
+    <th>Broker</th>
+    <th>Current status</th>
+    <th>Date created</th>
+  </tr>
+  <tr>
+    <td>{{ client.first_name }}</td>
+    <td>{{ client.last_name }}</td>
+    <td>{{ client.phone_number }}</td>
+    <td>{{ client.email }}</td>
+    <td>{{ client.get_marital_status_display }}</td>
+    <td>{{ client.address }}</td>
+    <td>{{ client.income }}</td>
+    <td>{{ client.broker }}</td>
+    <td>{{ client.get_current_status_display }}</td>
+    <td>{{ client.date_created }}</td>
+  </tr>
+</table><br><br>
+
+
+<p>News</p>
+ <table>
+ <tr>
+     <th>Comment</th>
+     <th>Date</th>
+ </tr>
+{% for info in news %}
+    <tr>
+        <td>{{ info.text }}</td>
+        <td>{{ info.date_created }}</td>
+    </tr>
+{% endfor %}
+ </table>
+</body>
+</html>

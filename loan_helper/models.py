@@ -31,10 +31,9 @@ class Client(models.Model):
     marital_status = models.IntegerField(choices=MARITAL_STATUS)
     address = models.CharField(max_length=128, null=True)
     broker = models.ForeignKey('Broker', on_delete=models.CASCADE)
-    news = models.ForeignKey('Comment', on_delete=models.CASCADE, null=True)
     current_status = models.IntegerField(choices=CURRENT_STATUS)
     date_created = models.DateField(auto_now_add=True, null=True)
-    income = models.ManyToManyField('Occupation', through='ClientOccupation', null=True)
+    income = models.ManyToManyField('Occupation', through='ClientOccupation')
 
 
 class Occupation(models.Model):
@@ -72,6 +71,7 @@ class Bank(models.Model):
 
 class Comment(models.Model):
     text = models.TextField(null=True)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, null=True)
+    date_created = models.DateField(auto_now_add=True, null=True)
 
-    def __str__(self):
-        return self.text
+
