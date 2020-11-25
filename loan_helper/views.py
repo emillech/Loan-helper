@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
-from loan_helper.models import Client, Broker, Comment
+from loan_helper.models import Client, Broker, Comment, Occupation, ClientOccupation
 
 
 class IndexView(View):
@@ -29,10 +29,12 @@ class ClientDetailsView(View):
     def get(self, request, id):
         client = Client.objects.get(id=id)
         news = Comment.objects.filter(client_id=id)
+        client_occupation = ClientOccupation.objects.filter(client=client)
 
         ctx = {
             'client': client,
-            'news': news
+            'news': news,
+            'client_occupation': client_occupation
         }
 
         return render(request, 'client_details.html', ctx)

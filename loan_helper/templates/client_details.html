@@ -6,6 +6,9 @@
 </head>
 <body>
 
+<h1>Client details: {{ client.first_name }} {{ client.last_name }}</h1>
+<h2><a href="/update_client/{{ client.id }}"> <input type="button" value="Update client"></a></h2>
+
  <table style="width:100%">
   <tr>
     <th>First Name</th>
@@ -14,7 +17,8 @@
     <th>Email</th>
     <th>Marital Status</th>
     <th>Address</th>
-    <th>Income <a href="/add_income/{{ client.id }}"> <input type="button" value="Add Income"></a></th>
+    <th>Occupation</th>
+    <th>Monthly Income <a href="/add_income/{{ client.id }}"> <input type="button" value="Add Income"></a></th>
     <th>Broker</th>
     <th>Current status</th>
     <th>Date created</th>
@@ -26,7 +30,16 @@
     <td>{{ client.email }}</td>
     <td>{{ client.get_marital_status_display }}</td>
     <td>{{ client.address }}</td>
-    <td>{{ client.income }}</td>
+      <td>
+            {% for occupation in client_occupation %}
+            <li>{{ occupation.occupation }}</li>
+            {% endfor %}
+      </td>
+      <td>
+            {% for income in client_occupation %}
+            <li>{{ income.monthly_income }}</li>
+            {% endfor %}
+      </td>
     <td>{{ client.broker }}</td>
     <td>{{ client.get_current_status_display }}</td>
     <td>{{ client.date_created }}</td>
@@ -34,7 +47,9 @@
 </table><br><br>
 
 
-<p>News</p>
+<h3>News</h3>
+<p><input name="comment" type="text"></p>
+<p><a href="/update_client/{{ client.id }}"> <input type="button" value="Add new comment"></a></p>
  <table>
  <tr>
      <th>Comment</th>
