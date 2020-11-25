@@ -72,6 +72,6 @@ class Bank(models.Model):
 class Comment(models.Model):
     text = models.TextField(null=True)
     client = models.ForeignKey(Client, on_delete=models.CASCADE, null=True)
-    date_created = models.DateField(auto_now_add=True, null=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
 
 

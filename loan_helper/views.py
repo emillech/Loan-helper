@@ -14,8 +14,7 @@ class IndexView(View):
 class ClientCreate(CreateView):
     model = Client
     fields = '__all__'
-    exclude = ['news']
-    success_url = reverse_lazy('')
+    success_url = reverse_lazy('/all_clients/')
 
 
 class BrokerCreate(CreateView):
@@ -30,6 +29,25 @@ class ClientDetailsView(View):
         client = Client.objects.get(id=id)
         news = Comment.objects.filter(client_id=id)
         client_occupation = ClientOccupation.objects.filter(client=client)
+
+        ctx = {
+            'client': client,
+            'news': news,
+            'client_occupation': client_occupation
+        }
+
+        return render(request, 'client_details.html', ctx)
+
+    def post(self, request, id):
+        client = Client.objects.get(id=id)
+        news = Comment.objects.filter(client_id=id)
+        client_occupation = ClientOccupation.objects.filter(client=client)
+
+        comment = request.POST.get('comment')
+        submit = request.POST.get('submit')
+
+        if comment and submit:
+            Comment.objects.create(text=comment, client_id=id)
 
         ctx = {
             'client': client,

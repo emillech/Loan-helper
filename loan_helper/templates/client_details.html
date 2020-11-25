@@ -48,9 +48,13 @@
 
 
 <h3>News</h3>
-<p><input name="comment" type="text"></p>
-<p><a href="/update_client/{{ client.id }}"> <input type="button" value="Add new comment"></a></p>
- <table>
+
+<form method="post">
+    {% csrf_token %}
+    <textarea name="comment" type="text"></textarea>
+    <p><input type="submit" value="Add new comment" name="submit"></p>
+</form>
+ <table style="width:100%">
  <tr>
      <th>Comment</th>
      <th>Date</th>
