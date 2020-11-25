@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from loan_helper.views import IndexView
+from loan_helper.views import IndexView, ClientCreate
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('index/', IndexView.as_view())
+    path('', IndexView.as_view()),
+    path('add_client/', ClientCreate.as_view()),
 ]
