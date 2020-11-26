@@ -4,7 +4,7 @@ from django.views import View
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView
 from django.urls import reverse_lazy
-from loan_helper.models import Client, Broker, Comment, Occupation, ClientOccupation
+from loan_helper.models import Client, Broker, Comment, Occupation, ClientOccupation, Bank, SuccessfulLoan
 
 
 class IndexView(View):
@@ -16,13 +16,19 @@ class IndexView(View):
 class ClientCreate(CreateView):
     model = Client
     fields = '__all__'
-    success_url = '/all_clients'
+    success_url = '/all_clients/'
 
 
 class BrokerCreate(CreateView):
     model = Broker
     fields = '__all__'
-    success_url = reverse_lazy('')
+    success_url = '/all_brokers/'
+
+
+class BankCreate(CreateView):
+    model = Bank
+    fields = '__all__'
+    success_url = '/all_banks/'
 
 
 class ClientDetailsView(View):
