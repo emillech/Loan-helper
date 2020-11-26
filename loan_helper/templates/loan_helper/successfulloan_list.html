@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loans list</title>
+</head>
+<body>
+<h1>Successful Loans</h1>
+<table style="width:100%">
+
+  <tr>
+    <th>Client</th>
+    <th>Bank</th>
+    <th>Loan Amount</th>
+    <th>Date</th>
+    <th>Details</th>
+
+  </tr>
+       {% for loan in object_list %}
+  <tr>
+
+    <td>{{ loan.client }}</td>
+    <td>{{ loan.bank }}</td>
+    <td>{{ loan.loan_amount }}</td>
+    <td>{{ loan.date_created }}</td>
+    <td><a href="/broker_details/{{ broker.id }}"> <input type="button" value="Click"></a></td>
+  </tr>
+     {% empty %}
+    <li>No brokers yet.</li>
+{% endfor %}
+</table><br><br>
+</body>
+</html>

@@ -65,6 +65,11 @@ class BankListView(ListView):
     ordering = ['name']
 
 
+class SuccessfulLoanListView(ListView):
+    model = SuccessfulLoan
+    ordering = ['client']
+
+
 class ClientDetailsView(View):
 
     def get(self, request, id):

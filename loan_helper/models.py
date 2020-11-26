@@ -66,6 +66,7 @@ class SuccessfulLoan(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     bank = models.ForeignKey('Bank', on_delete=models.CASCADE)
     loan_amount = models.IntegerField()
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
 
 
 class Bank(models.Model):
