@@ -60,6 +60,11 @@ class BrokerListView(ListView):
     ordering = ['name']
 
 
+class BankListView(ListView):
+    model = Bank
+    ordering = ['name']
+
+
 class ClientDetailsView(View):
 
     def get(self, request, id):

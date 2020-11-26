@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Banks List</title>
+</head>
+<body>
+<h1>Brokers</h1>
+<table style="width:100%">
+
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+
+  </tr>
+       {% for bank in object_list %}
+  <tr>
+
+    <td>{{ bank.name }}</td>
+    <td>{{ bank.address }}</td>
+  </tr>
+     {% empty %}
+    <li>No banks yet.</li>
+{% endfor %}
+</table><br><br>
+</body>
+</html>
