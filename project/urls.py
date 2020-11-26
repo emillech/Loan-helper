@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from loan_helper.views import IndexView, ClientCreate, BrokerCreate, ClientDetailsView, ClientListView, ClientUpdate, \
-    BankCreate, SuccessfulLoanCreate
+    BankCreate, SuccessfulLoanCreate, BrokerListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,4 +28,5 @@ urlpatterns = [
     path('client_update/<int:pk>/', ClientUpdate.as_view()),
     path('add_bank/', BankCreate.as_view()),
     path('add_loan/', SuccessfulLoanCreate.as_view()),
+    path('all_brokers/', BrokerListView.as_view()),
 ]

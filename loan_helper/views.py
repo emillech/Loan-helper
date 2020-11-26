@@ -37,6 +37,29 @@ class SuccessfulLoanCreate(CreateView):
     success_url = '/all_successful_loans/'
 
 
+class ClientListView(ListView):
+    model = Client
+    ordering = ['first_name']
+
+    def get_context_data(self, **kwargs):
+        context = super(ClientListView, self).get_context_data(**kwargs)
+        context.update({
+            'client_occupation': ClientOccupation.objects.all(),
+        })
+        return context
+
+    def get_ordering(self):
+        order = self.request.GET.get('order')
+        if order:
+            ordering = self.request.GET.get('ordering', order)
+            return ordering
+
+
+class BrokerListView(ListView):
+    model = Broker
+    ordering = ['name']
+
+
 class ClientDetailsView(View):
 
     def get(self, request, id):
@@ -72,22 +95,7 @@ class ClientDetailsView(View):
         return render(request, 'client_details.html', ctx)
 
 
-class ClientListView(ListView):
-    model = Client
-    ordering = ['first_name']
 
-    def get_context_data(self, **kwargs):
-        context = super(ClientListView, self).get_context_data(**kwargs)
-        context.update({
-            'client_occupation': ClientOccupation.objects.all(),
-        })
-        return context
-
-    def get_ordering(self):
-        order = self.request.GET.get('order')
-        if order:
-            ordering = self.request.GET.get('ordering', order)
-            return ordering
 
 
 class ClientUpdate(UpdateView):
