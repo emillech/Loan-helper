@@ -6,6 +6,7 @@ MARITAL_STATUS = (
     (2, "Married with DoP"),
     (3, "Married without DoP"),
     (4, "Widow/Widower"),
+    (5, "Divorced")
 )
 
 CURRENT_STATUS = (

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from django.views.generic.edit import CreateView
+from django.views.generic import ListView
 from django.urls import reverse_lazy
 from loan_helper.models import Client, Broker, Comment, Occupation, ClientOccupation
 
@@ -56,3 +57,14 @@ class ClientDetailsView(View):
         }
 
         return render(request, 'client_details.html', ctx)
+
+
+class ClientListView(ListView):
+    model = Client
+
+    def get_context_data(self, **kwargs):
+        context = super(ClientListView, self).get_context_data(**kwargs)
+        context.update({
+            'client_occupation': ClientOccupation.objects.all(),
+        })
+        return context

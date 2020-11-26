@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Clients</title>
+</head>
+<body>
+<h1>Clients</h1>
+<ul>
+{% for client in object_list %}
+     <table style="width:100%">
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Phone Number</th>
+    <th>Email</th>
+    <th>Marital Status</th>
+    <th>Address</th>
+    <th>Occupation</th>
+    <th>Monthly Income</th>
+    <th>Broker</th>
+    <th>Current status</th>
+    <th>Date created</th>
+  </tr>
+  <tr>
+    <td>{{ client.first_name }}</td>
+    <td>{{ client.last_name }}</td>
+    <td>{{ client.phone_number }}</td>
+    <td>{{ client.email }}</td>
+    <td>{{ client.get_marital_status_display }}</td>
+    <td>{{ client.address }}</td>
+      <td>
+            {% for occupation in client.clientoccupation_set.all %}
+            <li>{{ occupation.occupation }}</li>
+            {% endfor %}
+      </td>
+      <td>
+            {% for income in client.clientoccupation_set.all %}
+            <li>{{ income.monthly_income }}</li>
+            {% endfor %}
+      </td>
+    <td>{{ client.broker }}</td>
+    <td>{{ client.get_current_status_display }}</td>
+    <td>{{ client.date_created }}</td>
+  </tr>
+</table><br><br>
+{% empty %}
+    <li>No clients yet.</li>
+{% endfor %}
+</ul>
+</body>
+</html>
