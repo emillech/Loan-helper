@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from loan_helper.views import IndexView, ClientCreate, BrokerCreate, ClientDetailsView, ClientListView
+from loan_helper.views import IndexView, ClientCreate, BrokerCreate, ClientDetailsView, ClientListView, ClientUpdate
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +24,5 @@ urlpatterns = [
     path('add_broker/', BrokerCreate.as_view()),
     path('client_details/<int:id>/', ClientDetailsView.as_view()),
     path('all_clients/', ClientListView.as_view()),
+    path('client_update/<int:pk>/', ClientUpdate.as_view()),
 ]

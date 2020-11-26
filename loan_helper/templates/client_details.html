@@ -7,7 +7,7 @@
 <body>
 
 <h1>Client details: {{ client.first_name }} {{ client.last_name }}</h1>
-<h2><a href="/update_client/{{ client.id }}"> <input type="button" value="Update client"></a></h2>
+<h2></h2>
 
  <table style="width:100%">
   <tr>
@@ -18,10 +18,11 @@
     <th>Marital Status</th>
     <th>Address</th>
     <th>Occupation</th>
-    <th>Monthly Income <a href="/add_income/{{ client.id }}"> <input type="button" value="Add Income"></a></th>
+    <th>Monthly Income</th>
     <th>Broker</th>
     <th>Current status</th>
     <th>Date created</th>
+    <th>Actions</th>
   </tr>
   <tr>
     <td>{{ client.first_name }}</td>
@@ -43,6 +44,9 @@
     <td>{{ client.broker }}</td>
     <td>{{ client.get_current_status_display }}</td>
     <td>{{ client.date_created }}</td>
+    <td>
+        <a href="/client_update/{{ client.id }}"> <input type="button" value="Update client"></a><br>
+    </td>
   </tr>
 </table><br><br>
 

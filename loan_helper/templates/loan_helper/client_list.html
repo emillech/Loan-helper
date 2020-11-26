@@ -6,9 +6,17 @@
 </head>
 <body>
 <h1>Clients</h1>
-<ul>
-{% for client in object_list %}
+
+<p>Order by</p>
+<form action="" method="GET">
+<select name="order" id="order">
+    <option>First Name</option>
+    <option name="last_name">Last Name</option>
+    <option>Date Created</option>
+</select>
+</form>
      <table style="width:100%">
+
   <tr>
     <th>First Name</th>
     <th>Last Name</th>
@@ -21,8 +29,11 @@
     <th>Broker</th>
     <th>Current status</th>
     <th>Date created</th>
+    <th>Details</th>
   </tr>
+       {% for client in object_list %}
   <tr>
+
     <td>{{ client.first_name }}</td>
     <td>{{ client.last_name }}</td>
     <td>{{ client.phone_number }}</td>
@@ -42,11 +53,14 @@
     <td>{{ client.broker }}</td>
     <td>{{ client.get_current_status_display }}</td>
     <td>{{ client.date_created }}</td>
+    <td><a href="/client_details/{{ client.id }}"> <input type="button" value="Click"></a></td>
   </tr>
-</table><br><br>
-{% empty %}
+     {% empty %}
     <li>No clients yet.</li>
 {% endfor %}
-</ul>
+</table><br><br>
+
+
+
 </body>
 </html>
