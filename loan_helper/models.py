@@ -36,6 +36,9 @@ class Client(models.Model):
     date_created = models.DateField(auto_now_add=True, null=True)
     income = models.ManyToManyField('Occupation', through='ClientOccupation')
 
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
+
 
 class Occupation(models.Model):
     occupation = models.IntegerField(choices=OCCUPATION)
@@ -68,6 +71,9 @@ class SuccessfulLoan(models.Model):
 class Bank(models.Model):
     name = models.CharField(max_length=16)
     address = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.name
 
 
 class Comment(models.Model):
