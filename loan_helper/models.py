@@ -10,11 +10,13 @@ MARITAL_STATUS = (
 )
 
 CURRENT_STATUS = (
-    (1, "Waiting for documents"),
-    (2, "Sent to the bank"),
-    (3, "Analysis in progress"),
-    (4, "Negative decision"),
-    (5, "Positive decision")
+    (1, 'New Client'),
+    (2, "Waiting for documents"),
+    (3, "Sent to the bank"),
+    (4, 'Offer'),
+    (5, "Analysis in progress"),
+    (6, "Negative decision"),
+    (7, "Positive decision")
 )
 
 OCCUPATION = (
@@ -29,7 +31,7 @@ class Client(models.Model):
     last_name = models.CharField(max_length=16)
     phone_number = models.IntegerField()
     email = models.EmailField(null=True)
-    marital_status = models.IntegerField(choices=MARITAL_STATUS)
+    marital_status = models.IntegerField(choices=MARITAL_STATUS, null=True)
     address = models.CharField(max_length=128, null=True)
     broker = models.ForeignKey('Broker', on_delete=models.CASCADE)
     current_status = models.IntegerField(choices=CURRENT_STATUS)

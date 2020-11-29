@@ -5,6 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView
 from django.urls import reverse_lazy
 from loan_helper.models import Client, Broker, Comment, Occupation, ClientOccupation, Bank, SuccessfulLoan
+from loan_helper.forms import AddClientForm, UpdateClientForm
 
 
 class IndexView(View):
@@ -15,8 +16,8 @@ class IndexView(View):
 
 class ClientCreate(CreateView):
     model = Client
-    fields = '__all__'
     success_url = '/all_clients/'
+    form_class = AddClientForm
 
 
 class BrokerCreate(CreateView):
@@ -105,15 +106,13 @@ class ClientDetailsView(View):
         return render(request, 'client_details.html', ctx)
 
 
-
-
-
 class ClientUpdate(UpdateView):
     model = Client
-    fields = '__all__'
     pk_url_kwarg = 'pk'
+    form_class = UpdateClientForm
 
     def form_valid(self, form):
         """If the form is valid, redirect to the supplied URL."""
         client_id = self.object.id
+        self.object.save()
         return HttpResponseRedirect(f'/client_details/{client_id}')
