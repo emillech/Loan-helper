@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView, FormView
@@ -102,6 +102,11 @@ class ClientDetailsView(View):
             'news': news,
             'client_occupation': client_occupation
         }
+
+        delete_client = request.POST.get('delete_client')
+        if delete_client:
+            client.delete()
+            return redirect('/all_clients/')
 
         return render(request, 'client_details.html', ctx)
 

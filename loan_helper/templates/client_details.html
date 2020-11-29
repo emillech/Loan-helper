@@ -47,6 +47,10 @@
     <td>
         <a href="/client_update/{{ client.id }}"> <input type="button" value="Update client"></a><br>
         <a href="/income/{{ client.id }}"> <input type="button" value="Change income"></a><br>
+        <form method="post">
+            {% csrf_token %}
+        <input type="submit" value="Delete client" name="delete_client"><br>
+        </form>
     </td>
   </tr>
 </table><br><br>

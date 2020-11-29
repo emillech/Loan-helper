@@ -34,7 +34,3 @@ class UpdateClientForm(forms.ModelForm):
         ]
 
 
-# class ClientOccupationForm(forms.ModelForm):
-#     class Meta:
-#         model = ClientOccupation
-#         fields = '__all__'
