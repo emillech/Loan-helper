@@ -1,7 +1,7 @@
 from django import forms
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
-from loan_helper.models import Client
+from loan_helper.models import Client, ClientOccupation
 
 
 class AddClientForm(forms.ModelForm):
@@ -32,3 +32,9 @@ class UpdateClientForm(forms.ModelForm):
             'broker',
             'current_status'
         ]
+
+
+# class ClientOccupationForm(forms.ModelForm):
+#     class Meta:
+#         model = ClientOccupation
+#         fields = '__all__'
