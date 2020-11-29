@@ -67,11 +67,18 @@
  <tr>
      <th>Comment</th>
      <th>Date</th>
+     <th>Actions</th>
  </tr>
 {% for info in news %}
     <tr>
         <td>{{ info.text }}</td>
         <td>{{ info.date_created }}</td>
+        <td>
+            <form method="post">
+                {% csrf_token %}
+                <input type="submit" value="Edit comment" name="delete_comment"><br>
+            </form>
+        </td>
     </tr>
 {% endfor %}
  </table>

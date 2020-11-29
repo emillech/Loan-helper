@@ -22,7 +22,8 @@ CURRENT_STATUS = (
 OCCUPATION = (
     (1, "Employment contract"),
     (2, "Mandate contract"),
-    (3, "Small Business")
+    (3, "Small Business"),
+    (4, "Pension")
 )
 
 

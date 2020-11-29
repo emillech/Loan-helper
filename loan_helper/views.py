@@ -91,6 +91,7 @@ class ClientDetailsView(View):
         news = Comment.objects.filter(client_id=id)
         client_occupation = ClientOccupation.objects.filter(client=client)
 
+        delete_comment = request.POST.get('delete_comment')
         comment = request.POST.get('comment')
         submit = request.POST.get('submit')
 
@@ -107,6 +108,9 @@ class ClientDetailsView(View):
         if delete_client:
             client.delete()
             return redirect('/all_clients/')
+
+        if delete_comment:
+            pass
 
         return render(request, 'client_details.html', ctx)
 
@@ -161,6 +165,9 @@ class ClientOccupationCreate(View):
             elif add_occupation == "3":
                 chosen_job = Occupation(occupation=3)
                 chosen_job.save()
+            elif add_occupation == "4":
+                chosen_job = Occupation(occupation=4)
+                chosen_job.save()
             ClientOccupation.objects.create(client=client, occupation=chosen_job, monthly_income=income)
 
         # pomyslec co tu zrobic, gdy beda dwa takie same dochody, sytuacja raczej niemozliwa, ale kod sie wyjebie
@@ -175,6 +182,10 @@ class ClientOccupationCreate(View):
                 client_job.delete()
             elif remove_occupation == "Employment contract":
                 job = client.income.get(occupation=1)
+                client_job = ClientOccupation.objects.filter(client=client, occupation=job)
+                client_job.delete()
+            elif remove_occupation == "Pension":
+                job = client.income.get(occupation=4)
                 client_job = ClientOccupation.objects.filter(client=client, occupation=job)
                 client_job.delete()
 
