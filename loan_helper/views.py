@@ -6,6 +6,7 @@ from django.views.generic import ListView, FormView
 from django.urls import reverse_lazy
 from loan_helper.models import Client, Broker, Comment, Occupation, ClientOccupation, Bank, SuccessfulLoan
 from loan_helper.forms import AddClientForm, UpdateClientForm
+from django.db.models import Q
 
 
 class IndexView(View):
@@ -40,7 +41,7 @@ class SuccessfulLoanCreate(CreateView):
 
 class ClientListView(ListView):
     model = Client
-    ordering = ['first_name']
+    ordering = ['date_created']
 
     def get_context_data(self, **kwargs):
         context = super(ClientListView, self).get_context_data(**kwargs)
@@ -51,9 +52,35 @@ class ClientListView(ListView):
 
     def get_ordering(self):
         order = self.request.GET.get('order')
-        if order:
-            ordering = self.request.GET.get('ordering', order)
-            return ordering
+        sort = self.request.GET.get('sort')
+        if sort:
+            if order == "First Name":
+                ordering = ['first_name']
+                return ordering
+            elif order == "Last Name":
+                ordering = ['last_name']
+                return ordering
+            elif order == "Date Created":
+                ordering = ['date_created']
+                return ordering
+            elif order == "Status":
+                ordering = ['current_status']
+                return ordering
+
+    def get_queryset(self):
+        search = self.request.GET.get('search')
+        data_search = self.request.GET.get('data_search')
+        object_list = self.model.objects.all()
+        if search:
+            object_list = object_list.filter(
+                Q(first_name__icontains=data_search) |
+                Q(last_name__icontains=data_search) |
+                Q(phone_number__icontains=data_search) |
+                Q(email__icontains=data_search) |
+                Q(marital_status__icontains=data_search) |
+                Q(address__icontains=data_search)
+            )
+        return object_list
 
 
 class BrokerListView(ListView):

@@ -9,12 +9,21 @@
 
 <p>Order by</p>
 <form action="" method="GET">
-<select name="order" id="order">
-    <option>First Name</option>
+<select name="order">
+    <option name="first_name">First Name</option>
     <option name="last_name">Last Name</option>
-    <option>Date Created</option>
+    <option name="date_created">Date Created</option>
+    <option name="status">Status</option>
 </select>
+    <input type="submit" name="sort" value="Sort">
+</form><br>
+
+<form action="" method="GET">
+    <input type="text" name="data_search">
+    <input type="submit" name="search" value="Search">
 </form>
+
+
      <table style="width:100%">
 
   <tr>
