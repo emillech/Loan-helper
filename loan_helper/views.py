@@ -41,7 +41,7 @@ class SuccessfulLoanCreate(CreateView):
 
 class ClientListView(ListView):
     model = Client
-    ordering = ['date_created']
+    ordering = 'date_created'
 
     def get_context_data(self, **kwargs):
         context = super(ClientListView, self).get_context_data(**kwargs)
@@ -55,16 +55,16 @@ class ClientListView(ListView):
         sort = self.request.GET.get('sort')
         if sort:
             if order == "First Name":
-                ordering = ['first_name']
+                ordering = 'first_name'
                 return ordering
             elif order == "Last Name":
-                ordering = ['last_name']
+                ordering = 'last_name'
                 return ordering
             elif order == "Date Created":
-                ordering = ['date_created']
+                ordering = 'date_created'
                 return ordering
             elif order == "Status":
-                ordering = ['current_status']
+                ordering = 'current_status'
                 return ordering
 
     def get_queryset(self):
@@ -80,6 +80,10 @@ class ClientListView(ListView):
                 Q(marital_status__icontains=data_search) |
                 Q(address__icontains=data_search)
             )
+        ordering = self.get_ordering()
+
+        if ordering and isinstance(ordering, str):
+            object_list = object_list.order_by(ordering)
         return object_list
 
 
