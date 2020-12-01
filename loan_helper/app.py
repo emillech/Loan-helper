@@ -42,6 +42,7 @@ def add_broker():
 
 
 def add_successful_loan():
+    # to nie jest dokladny sposob liczenia
     for _ in range(15):
         all_clients = Client.objects.all()
         client = random.choice(all_clients)
@@ -58,12 +59,12 @@ def add_successful_loan():
             client=client,
             bank=bank,
             loan_amount_gross=loan_amount_gross,
-            loan_amount_net= loan_amount_net,
-            bank_charge= bank_charge,
-            interest_rate= interest_rate,
-            bank_insurance= bank_insurance,
-            repayment_term= repayment_term,
-            instalment_amount= instalment_amount,
+            loan_amount_net=loan_amount_net,
+            bank_charge=bank_charge,
+            interest_rate=interest_rate,
+            bank_insurance=bank_insurance,
+            repayment_term=repayment_term,
+            instalment_amount=instalment_amount,
         )
 
-add_successful_loan()
+add_client()

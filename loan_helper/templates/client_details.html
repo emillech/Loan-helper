@@ -55,14 +55,44 @@
   </tr>
 </table><br><br>
 
+<h3>Current Loans (only given by our company)</h3>
+<table style="width:100%">
+
+  <tr>
+    <th>Bank</th>
+    <th>Loan Amount Gross [zł]</th>
+    <th>Loan Amount Net [zł]</th>
+    <th>Bank Charge [%]</th>
+    <th>Interest rate [%]</th>
+    <th>Bank insurance [zł]</th>
+    <th>Repayment term [months]</th>
+    <th>Instalment amount [zł]</th>
+    <th>Date</th>
+
+
+  </tr>
+{% for loan in client_loans %}
+  <tr>
+
+    <td>{{ loan.bank }}</td>
+    <td>{{ loan.loan_amount_gross }}</td>
+    <td>{{ loan.loan_amount_net }}</td>
+    <td>{{ loan.bank_charge }}</td>
+    <td>{{ loan.interest_rate }}</td>
+    <td>{{ loan.bank_insurance }}</td>
+    <td>{{ loan.repayment_term }}</td>
+    <td>{{ loan.instalment_amount }}</td>
+    <td>{{ loan.date_created }}</td>
+
+  </tr>
+     {% empty %}
+    <li>No loans yet.</li>
+{% endfor %}
+</table><br><br>
 
 <h3>News</h3>
 
-<form method="post">
-    {% csrf_token %}
-    <textarea name="comment" type="text"></textarea>
-    <p><input type="submit" value="Add new comment" name="submit"></p>
-</form>
+
  <table style="width:100%">
  <tr>
      <th>Comment</th>
@@ -82,5 +112,11 @@
     </tr>
 {% endfor %}
  </table>
+
+<form method="post">
+    {% csrf_token %}
+    <textarea name="comment" type="text"></textarea>
+    <p><input type="submit" value="Add new comment" name="submit"></p>
+</form>
 </body>
 </html>

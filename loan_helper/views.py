@@ -99,7 +99,7 @@ class BankListView(ListView):
 
 class SuccessfulLoanListView(ListView):
     model = SuccessfulLoan
-    ordering = ['client']
+    ordering = ['-date_created']
 
 
 class ClientDetailsView(View):
@@ -108,11 +108,12 @@ class ClientDetailsView(View):
         client = Client.objects.get(id=id)
         news = Comment.objects.filter(client_id=id)
         client_occupation = ClientOccupation.objects.filter(client=client)
-
+        client_loans = SuccessfulLoan.objects.filter(client=client)
         ctx = {
             'client': client,
             'news': news,
-            'client_occupation': client_occupation
+            'client_occupation': client_occupation,
+            'client_loans': client_loans
         }
 
         return render(request, 'client_details.html', ctx)
