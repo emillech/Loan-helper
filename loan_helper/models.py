@@ -68,7 +68,13 @@ class Broker(models.Model):
 class SuccessfulLoan(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     bank = models.ForeignKey('Bank', on_delete=models.CASCADE)
-    loan_amount = models.IntegerField()
+    loan_amount_gross = models.IntegerField()
+    loan_amount_net = models.FloatField()
+    bank_charge = models.FloatField()
+    interest_rate = models.FloatField()
+    bank_insurance = models.FloatField(null=True)
+    repayment_term = models.IntegerField()
+    instalment_amount = models.FloatField()
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
 
