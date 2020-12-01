@@ -101,6 +101,23 @@ class SuccessfulLoanListView(ListView):
     model = SuccessfulLoan
     ordering = ['-date_created']
 
+    def get_ordering(self):
+        order = self.request.GET.get('order')
+        sort = self.request.GET.get('sort')
+        if sort:
+            if order == "Client":
+                ordering = 'client'
+                return ordering
+            elif order == "Bank":
+                ordering = 'bank'
+                return ordering
+            elif order == "Newest":
+                ordering = '-date_created'
+                return ordering
+            elif order == "Oldest":
+                ordering = 'date_created'
+                return ordering
+
 
 class ClientDetailsView(View):
 
