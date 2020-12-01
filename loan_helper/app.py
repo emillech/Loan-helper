@@ -6,14 +6,14 @@ fake = Faker()
 
 
 def add_client():
-    for _ in range(10):
+    for _ in range(100):
         all_brokers = Broker.objects.all()
         one_broker = random.choice(all_brokers)
         phone_number = random.randint(100000000, 999999999)
         current_status = random.randint(1, 7)
-        occupation = random.randint(1, 5)
+        occupation = random.randint(1, 4)
         monthly_income = random.randint(1000, 20000)
-        marital_status = random.randint(1, 6)
+        marital_status = random.randint(1, 5)
         c1 = Client.objects.create(
             first_name=fake.first_name(),
             last_name=fake.last_name(),
@@ -32,8 +32,27 @@ def add_client():
         )
 
 
+def add_bank():
+    Bank.objects.create(name='Alior Bank', address='Warsaw')
+    Bank.objects.create(name='BNP Paribas', address='Warsaw')
+    Bank.objects.create(name='Santander', address='Warsaw')
+    Bank.objects.create(name='mBank', address='Warsaw')
+    Bank.objects.create(name='Nest Bank', address='Warsaw')
+    Bank.objects.create(name='Credit Agricole', address='Warsaw')
+    Bank.objects.create(name='Skok', address='Warsaw')
+    Bank.objects.create(name='Getin Bank', address='Warsaw')
+    Bank.objects.create(name='Idea Bank', address='Warsaw')
+
+
+def add_ocuppation():
+    Occupation.objects.create(occupation=1)
+    Occupation.objects.create(occupation=2)
+    Occupation.objects.create(occupation=3)
+    Occupation.objects.create(occupation=4)
+
+
 def add_broker():
-    for _ in range(10):
+    for _ in range(30):
         Broker.objects.create(
             name=fake.company(),
             phone_number=random.randint(100000000, 999999999),
@@ -43,7 +62,7 @@ def add_broker():
 
 def add_successful_loan():
     # to nie jest dokladny sposob liczenia
-    for _ in range(15):
+    for _ in range(50):
         all_clients = Client.objects.all()
         client = random.choice(all_clients)
         all_brokers = Broker.objects.all()
@@ -70,4 +89,9 @@ def add_successful_loan():
             instalment_amount=instalment_amount,
         )
 
+
+# add_bank()
+# add_broker()
+# add_ocuppation()
 # add_client()
+# add_successful_loan()
