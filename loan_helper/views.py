@@ -121,9 +121,9 @@ class SuccessfulLoanListView(ListView):
 
 class ClientDetailsView(View):
 
-    def get(self, request, id):
-        client = Client.objects.get(id=id)
-        news = Comment.objects.filter(client_id=id)
+    def get(self, request, client_id):
+        client = Client.objects.get(id=client_id)
+        news = Comment.objects.filter(client_id=client_id)
         client_occupation = ClientOccupation.objects.filter(client=client)
         client_loans = SuccessfulLoan.objects.filter(client=client)
         ctx = {
@@ -135,9 +135,9 @@ class ClientDetailsView(View):
 
         return render(request, 'client_details.html', ctx)
 
-    def post(self, request, id):
-        client = Client.objects.get(id=id)
-        news = Comment.objects.filter(client_id=id)
+    def post(self, request, client_id):
+        client = Client.objects.get(id=client_id)
+        news = Comment.objects.filter(client_id=client_id)
         client_occupation = ClientOccupation.objects.filter(client=client)
 
         delete_comment = request.POST.get('delete_comment')
@@ -162,6 +162,24 @@ class ClientDetailsView(View):
             pass
 
         return render(request, 'client_details.html', ctx)
+
+
+class BrokerDetailsView(View):
+    def get(self, request, broker_id):
+        broker = Broker.objects.get(id=broker_id)
+        all_clients = Client.objects.filter(broker=broker)
+        all_loans = SuccessfulLoan.objects.filter(broker=broker)
+
+        ctx = {
+            'broker': broker,
+            'clients': all_clients,
+            'loans': all_loans
+        }
+
+        return render(request, 'broker_details.html', ctx)
+
+    def post(self, request, broker_id):
+        return render(request, 'broker_details.html')
 
 
 class ClientUpdate(UpdateView):

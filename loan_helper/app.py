@@ -46,6 +46,8 @@ def add_successful_loan():
     for _ in range(15):
         all_clients = Client.objects.all()
         client = random.choice(all_clients)
+        all_brokers = Broker.objects.all()
+        broker = random.choice(all_brokers)
         all_banks = Bank.objects.all()
         bank = random.choice(all_banks)
         loan_amount_net = random.randint(10000, 500000)
@@ -57,6 +59,7 @@ def add_successful_loan():
         instalment_amount = round(((loan_amount_gross * 0.3) / repayment_term), 2)
         SuccessfulLoan.objects.create(
             client=client,
+            broker=broker,
             bank=bank,
             loan_amount_gross=loan_amount_gross,
             loan_amount_net=loan_amount_net,
@@ -67,4 +70,4 @@ def add_successful_loan():
             instalment_amount=instalment_amount,
         )
 
-add_client()
+# add_client()

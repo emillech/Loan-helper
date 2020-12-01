@@ -16,14 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from loan_helper.views import IndexView, ClientCreate, BrokerCreate, ClientDetailsView, ClientListView, ClientUpdate, \
-    BankCreate, SuccessfulLoanCreate, BrokerListView, BankListView, SuccessfulLoanListView, ClientOccupationCreate
+    BankCreate, SuccessfulLoanCreate, BrokerListView, BankListView, SuccessfulLoanListView, ClientOccupationCreate, \
+    BrokerDetailsView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view()),
     path('add_client/', ClientCreate.as_view()),
     path('add_broker/', BrokerCreate.as_view()),
-    path('client_details/<int:id>/', ClientDetailsView.as_view()),
+    path('client_details/<int:client_id>/', ClientDetailsView.as_view()),
     path('all_clients/', ClientListView.as_view()),
     path('client_update/<int:pk>/', ClientUpdate.as_view()),
     path('add_bank/', BankCreate.as_view()),
@@ -32,4 +33,5 @@ urlpatterns = [
     path('all_banks/', BankListView.as_view()),
     path('all_loans/', SuccessfulLoanListView.as_view()),
     path('income/<int:client_id>', ClientOccupationCreate.as_view()),
+    path('broker_details/<int:broker_id>', BrokerDetailsView.as_view())
 ]

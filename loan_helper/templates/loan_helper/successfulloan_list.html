@@ -5,6 +5,11 @@
     <title>Loans list</title>
 </head>
 <body>
+<a href="/"> <input type="button" value="Index"></a>
+<a href="/all_clients/"> <input type="button" value="Clients List"></a>
+<a href="/all_banks/"> <input type="button" value="Banks List"></a>
+<a href="/all_brokers/"> <input type="button" value="Brokers List"></a>
+<a href="/all_loans/"> <input type="button" value="Loans List"></a>
 <h1>Successful Loans</h1>
 
 <form action="" method="GET">
@@ -18,15 +23,11 @@
     <input type="submit" name="sort" value="Sort">
 </form><br>
 
-<form action="" method="GET">
-    <input type="text" name="data_search">
-    <input type="submit" name="search" value="Search">
-</form>
-
 <table style="width:100%">
 
   <tr>
     <th>Client</th>
+    <th>Broker</th>
     <th>Bank</th>
     <th>Loan Amount Gross [zł]</th>
     <th>Loan Amount Net [zł]</th>
@@ -43,6 +44,7 @@
   <tr>
 
     <td><a href="/client_details/{{ loan.client.id }}">{{ loan.client }}</a> </td>
+    <td><a href="/broker_details/{{ loan.broker.id }}">{{ loan.broker }}</a></td>
     <td>{{ loan.bank }}</td>
     <td>{{ loan.loan_amount_gross }}</td>
     <td>{{ loan.loan_amount_net }}</td>
