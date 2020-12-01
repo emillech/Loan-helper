@@ -44,7 +44,7 @@ def add_bank():
     Bank.objects.create(name='Idea Bank', address='Warsaw')
 
 
-def add_ocuppation():
+def add_occupation():
     Occupation.objects.create(occupation=1)
     Occupation.objects.create(occupation=2)
     Occupation.objects.create(occupation=3)
@@ -65,8 +65,7 @@ def add_successful_loan():
     for _ in range(50):
         all_clients = Client.objects.all()
         client = random.choice(all_clients)
-        all_brokers = Broker.objects.all()
-        broker = random.choice(all_brokers)
+        broker = client.broker
         all_banks = Bank.objects.all()
         bank = random.choice(all_banks)
         loan_amount_net = random.randint(10000, 500000)
@@ -92,6 +91,6 @@ def add_successful_loan():
 
 # add_bank()
 # add_broker()
-# add_ocuppation()
+# add_occupation()
 # add_client()
 # add_successful_loan()
