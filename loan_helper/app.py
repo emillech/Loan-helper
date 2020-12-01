@@ -40,16 +40,30 @@ def add_broker():
             email=fake.email()
         )
 
+
 def add_successful_loan():
-    all_clients = Client.objects.all()
-    client = random.choice(all_clients)
-    all_banks = Bank.objects.all()
-    bank = random.choice(all_banks)
-    loan_amount = random.randint(10000, 500000)
-    SuccessfulLoan.objects.create(
-        client=client,
-        bank=bank,
-        loan_amount=loan_amount
-    )
+    for _ in range(15):
+        all_clients = Client.objects.all()
+        client = random.choice(all_clients)
+        all_banks = Bank.objects.all()
+        bank = random.choice(all_banks)
+        loan_amount_net = random.randint(10000, 500000)
+        bank_charge = random.randint(5, 15)
+        interest_rate = random.randint(3, 10)
+        bank_insurance = 0.05 * loan_amount_net
+        repayment_term = random.randint(12, 120)
+        loan_amount_gross = loan_amount_net + (loan_amount_net * (bank_charge / 100)) + bank_insurance
+        instalment_amount = round(((loan_amount_gross * 0.3) / repayment_term), 2)
+        SuccessfulLoan.objects.create(
+            client=client,
+            bank=bank,
+            loan_amount_gross=loan_amount_gross,
+            loan_amount_net= loan_amount_net,
+            bank_charge= bank_charge,
+            interest_rate= interest_rate,
+            bank_insurance= bank_insurance,
+            repayment_term= repayment_term,
+            instalment_amount= instalment_amount,
+        )
 
 add_successful_loan()
