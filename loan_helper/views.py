@@ -194,6 +194,18 @@ class ClientUpdate(UpdateView):
         return HttpResponseRedirect(f'/client_details/{client_id}')
 
 
+class BrokerUpdate(UpdateView):
+    model = Broker
+    pk_url_kwarg = 'pk'
+    fields = '__all__'
+
+    def form_valid(self, form):
+        """If the form is valid, redirect to the supplied URL."""
+        broker_id = self.object.id
+        self.object.save()
+        return HttpResponseRedirect(f'/client_details/{broker_id}')
+
+
 class ClientOccupationCreate(View):
     def get(self, request, client_id):
         client = Client.objects.get(id=client_id)
