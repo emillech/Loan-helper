@@ -37,6 +37,7 @@
     <th>Repayment term [months]</th>
     <th>Instalment amount [zł]</th>
     <th>Date</th>
+    <th>Actions</th>
 
 
   </tr>
@@ -54,6 +55,9 @@
     <td>{{ loan.repayment_term }}</td>
     <td>{{ loan.instalment_amount }}</td>
     <td>{{ loan.date_created }}</td>
+    <td>
+        <a href="loan_update/{{ loan.id }}"> <input type="button" value="Update"></a>
+    </td>
 
   </tr>
      {% empty %}
