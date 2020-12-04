@@ -21,7 +21,7 @@ def test_add_one_client_to_db(django_client, new_broker):
         'phone_number': 999,
         'email': 'email@wp.pl',
         'address': 'warsaw',
-        'broker': broker_to_add,
+        'broker': broker_to_add.id,
         'current_status': 1,
     }
 
@@ -87,9 +87,9 @@ def test_add_one_loan_to_db(django_client, new_client, new_broker, new_bank):
     assert bank.name == "New Bank"
 
     loan_data = {
-        'client': client,
-        'broker': broker,
-        'bank': bank,
+        'client': client.id,
+        'broker': broker.id,
+        'bank': bank.id,
         'loan_amount_gross': 10000,
         'loan_amount_net': 5000.0,
         'bank_charge': 10.0,
