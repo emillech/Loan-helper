@@ -144,6 +144,17 @@ def test_show_client_details(django_client, new_client):
     assert Client.objects.count() == 1
 
     response = django_client.get(f"/client_details/{client.id}/", {})
-    
+
     assert response.status_code == 200
     assert 'Emil' in str(response.context['client'])
+
+
+@pytest.mark.django_db
+def test_show_broker_details(django_client, new_broker):
+    broker = Broker.objects.get(name="Company")
+    assert Broker.objects.count() == 1
+
+    response = django_client.get(f"/broker_details/{broker.id}/", {})
+
+    assert response.status_code == 200
+    assert 'Company' in str(response.context['broker'])

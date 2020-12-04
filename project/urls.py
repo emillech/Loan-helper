@@ -32,7 +32,7 @@ urlpatterns = [
     path('all_brokers/', BrokerListView.as_view()),
     path('all_banks/', BankListView.as_view()),
     path('all_loans/', SuccessfulLoanListView.as_view()),
-    path('income/<int:client_id>', ClientOccupationCreate.as_view()),
-    path('broker_details/<int:broker_id>', BrokerDetailsView.as_view()),
+    path('income/<int:client_id>/', ClientOccupationCreate.as_view()),
+    path('broker_details/<int:broker_id>/', BrokerDetailsView.as_view()),
     path('broker_update/<int:pk>/', BrokerUpdate.as_view()),
 ]
