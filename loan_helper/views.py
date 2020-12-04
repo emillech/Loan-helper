@@ -206,6 +206,13 @@ class BrokerUpdate(UpdateView):
         return HttpResponseRedirect(f'/client_details/{broker_id}')
 
 
+class LoanUpdate(UpdateView):
+    model = SuccessfulLoan
+    pk_url_kwarg = 'pk'
+    fields = '__all__'
+    success_url = '/all_loans/'
+
+
 class ClientOccupationCreate(View):
     def get(self, request, client_id):
         client = Client.objects.get(id=client_id)
