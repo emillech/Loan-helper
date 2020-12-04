@@ -1,6 +1,6 @@
 import pytest
 from django.test import Client as Django_Client
-from loan_helper.models import Client, Broker, Occupation, ClientOccupation, Bank
+from loan_helper.models import Client, Broker, Occupation, ClientOccupation, Bank, SuccessfulLoan
 from faker import Faker
 import random
 
@@ -58,4 +58,23 @@ def new_client(new_broker, new_occupation):
     return one_client
 
 
+@pytest.fixture
+def new_loan(new_client, new_broker, new_bank):
+    client = Client.objects.first()
+    broker = Broker.objects.first()
+    bank = Bank.objects.first()
+
+    loan = SuccessfulLoan.objects.create(
+        client=client,
+        broker=broker,
+        bank=bank,
+        loan_amount_gross=10000,
+        loan_amount_net=5000.0,
+        bank_charge=10.0,
+        interest_rate=5.0,
+        bank_insurance=1000.0,
+        repayment_term=120,
+        instalment_amount=100.0)
+
+    return loan
 
