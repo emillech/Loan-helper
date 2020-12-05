@@ -103,6 +103,7 @@ class BankListView(ListView):
 class SuccessfulLoanListView(ListView):
     model = SuccessfulLoan
     ordering = ['-date_created']
+    paginate_by = 15
 
     def get_ordering(self):
         order = self.request.GET.get('order')
