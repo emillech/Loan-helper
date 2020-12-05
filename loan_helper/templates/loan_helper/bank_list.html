@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Banks List</title>
-</head>
-<body>
-<a href="/"> <input type="button" value="Index"></a>
-<a href="/all_clients/"> <input type="button" value="Clients List"></a>
-<a href="/all_banks/"> <input type="button" value="Banks List"></a>
-<a href="/all_brokers/"> <input type="button" value="Brokers List"></a>
-<a href="/all_loans/"> <input type="button" value="Loans List"></a>
-<h1>Brokers</h1>
+{% extends "base_list.html" %}
+    {% block title %}
+    <title>Bank list</title>
+    {% endblock %}
+{% block content %}
+
+<h1>Bank List</h1>
 <table style="width:100%">
 
   <tr>
@@ -28,5 +22,4 @@
     <li>No banks yet.</li>
 {% endfor %}
 </table><br><br>
-</body>
-</html>
+{% endblock %}

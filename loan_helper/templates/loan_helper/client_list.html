@@ -1,16 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Clients List</title>
-</head>
-<body>
-<a href="/"> <input type="button" value="Index"></a>
-<a href="/all_clients/"> <input type="button" value="Clients List"></a>
-<a href="/all_banks/"> <input type="button" value="Banks List"></a>
-<a href="/all_brokers/"> <input type="button" value="Brokers List"></a>
-<a href="/all_loans/"> <input type="button" value="Loans List"></a>
-<h1>Clients</h1>
+{% extends "base_list.html" %}
+    {% block title %}
+    <title>Client list</title>
+    {% endblock %}
+{% block content %}
+<h1>Client List</h1>
 
 <form action="" method="GET">
 <select name="order">
@@ -73,8 +66,4 @@
     <li>No clients yet.</li>
 {% endfor %}
 </table><br><br>
-
-
-
-</body>
-</html>
+{% endblock %}
