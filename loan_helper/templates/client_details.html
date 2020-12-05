@@ -47,7 +47,20 @@
             {% endfor %}
       </td>
     <td>{{ client.broker }}</td>
-    <td>{{ client.get_current_status_display }}</td>
+    <td>
+        {{ client.get_current_status_display }}
+        <form action="" method="POST">
+            {% csrf_token %}
+        <select name="new_status">
+            <option name="">-----</option>
+            {% for key, status in all_status %}
+            <option name="{{ key }}">{{ status }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" name="change_status" value="Change status">
+</form><br>
+
+    </td>
     <td>{{ client.date_created }}</td>
     <td>
         <a href="/client_update/{{ client.id }}"> <input type="button" value="Update client"></a><br>
@@ -121,7 +134,7 @@
 <form method="post">
     {% csrf_token %}
     <textarea name="comment" type="text"></textarea>
-    <p><input type="submit" value="Add new comment" name="submit"></p>
+    <p><input type="submit" value="Add new comment" name="add_new_comment"></p>
 </form>
 </body>
 </html>

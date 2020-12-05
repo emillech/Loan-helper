@@ -4,7 +4,8 @@ from django.views import View
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView, FormView
 from django.urls import reverse_lazy
-from loan_helper.models import Client, Broker, Comment, Occupation, ClientOccupation, Bank, SuccessfulLoan
+from loan_helper.models import Client, Broker, Comment, Occupation, ClientOccupation, Bank, SuccessfulLoan, \
+    CURRENT_STATUS
 from loan_helper.forms import AddClientForm, UpdateClientForm
 from django.db.models import Q
 
@@ -130,7 +131,8 @@ class ClientDetailsView(View):
             'client': client,
             'news': news,
             'client_occupation': client_occupation,
-            'client_loans': client_loans
+            'client_loans': client_loans,
+            'all_status': CURRENT_STATUS
         }
 
         return render(request, 'client_details.html', ctx)
@@ -139,21 +141,34 @@ class ClientDetailsView(View):
         client = Client.objects.get(id=client_id)
         news = Comment.objects.filter(client_id=client_id)
         client_occupation = ClientOccupation.objects.filter(client=client)
+        client_loans = SuccessfulLoan.objects.filter(client=client)
 
         delete_comment = request.POST.get('delete_comment')
         comment = request.POST.get('comment')
-        submit = request.POST.get('submit')
+        add_new_comment = request.POST.get('add_new_comment')
+        change_status = request.POST.get('change_status')
+        new_status = request.POST.get('new_status')
+        delete_client = request.POST.get('delete_client')
 
-        if comment and submit:
-            Comment.objects.create(text=comment, client_id=id)
+        if comment and add_new_comment:
+            Comment.objects.create(text=comment, client_id=client_id)
 
         ctx = {
             'client': client,
             'news': news,
-            'client_occupation': client_occupation
+            'client_occupation': client_occupation,
+            'all_status': CURRENT_STATUS,
+            'client_loans': client_loans,
         }
 
-        delete_client = request.POST.get('delete_client')
+        if change_status:
+            dictionary = dict(CURRENT_STATUS)
+            for key, item in dictionary.items():
+                if new_status == item:
+                    client.current_status = key
+                    client.save()
+                    return render(request, 'client_details.html', ctx)
+
         if delete_client:
             client.delete()
             return redirect('/all_clients/')
