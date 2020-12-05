@@ -3,10 +3,11 @@
     <title>Loan list</title>
     {% endblock %}
 {% block content %}
-<h2 style="text-align: center">Broker List</h2>
+    <hr>
+<h2 style="text-align: center">Loan List</h2>
     <hr>
 
-<div style="display: flex; justify-content: space-between">
+<div style="display: block; justify-content: space-between">
 <form action="" method="GET">
 <select name="order">
     <option name="">-----</option>
@@ -18,7 +19,7 @@
     <input type="submit" name="sort" value="Sort">
 </form><br>
 </div>
-<table class="table">
+<table class="table" style="background: rgba(230,233,235,0.62)">
 
   <tr>
     <th>Client</th>

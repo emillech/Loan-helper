@@ -3,10 +3,10 @@
     <title>Broker Details</title>
     {% endblock %}
 {% block content %}
-
-<h1>Broker details: {{ broker.name }}</h1>
-
-<table style="width:100%">
+<hr>
+<h2 style="text-align: center">Broker details: {{ broker.name }}</h2>
+<hr>
+<table class="table" style="background: rgba(230,233,235,0.62)">
 
   <tr>
     <th>Name</th>
@@ -22,9 +22,11 @@
     <td>{{ broker.email }}</td>
     <td><a href="/broker_update/{{ broker.id }}"> <input type="button" value="Update"></a></td>
   </tr>
-</table><br><br>
-
-     <table style="width:100%">
+</table>
+<hr>
+<h2 style="text-align: center">Broker's clients</h2>
+<hr>
+     <table class="table" style="background: rgba(230,233,235,0.62)">
 
   <tr>
     <th>First Name</th>
@@ -67,9 +69,11 @@
      {% empty %}
     <li>No clients yet.</li>
 {% endfor %}
-</table><br><br>
-
-<table style="width:100%">
+</table>
+<hr>
+<h2 style="text-align: center">Broker's loans</h2>
+<hr>
+<table class="table" style="background: rgba(230,233,235,0.62)">
 
   <tr>
     <th>Client</th>
@@ -101,7 +105,7 @@
 
   </tr>
      {% empty %}
-    <li>No loans yet.</li>
+    No loans yet.
 {% endfor %}
-</table><br><br>
+</table>
 {% endblock %}

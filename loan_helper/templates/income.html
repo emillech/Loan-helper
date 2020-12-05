@@ -1,18 +1,24 @@
 {% extends "base_form.html" %}
     {% block title %}
-    <title>Add Income</title>
+    <title>Income</title>
     {% endblock %}
 {% block content %}
-<h1>Change income</h1>
-<h2>Client: {{ client.first_name }} {{ client.last_name }}</h2>
+
+<h2>Change income</h2>
+    <hr>
+<h3>Client: {{ client.first_name }} {{ client.last_name }}</h3>
+    <hr>
 <p>Occupation:</p>
 <ul>
     {% for occupation in client_occupation %}
             <li>{{ occupation.occupation }} - {{ occupation.monthly_income }} zł </li>
             {% endfor %}
 </ul>
-<form method="post">{% csrf_token %}
-<h3>Remove Occupation</h3>
+<form method="post" class="form-group" style="display: inline-block; text-align: justify; width: 200px">
+    {% csrf_token %}
+<hr>
+<h4>Remove Occupation</h4>
+<hr>
 <select name="remove_occupation">
     {% for occupation in client_occupation %}
         <option value="{{ occupation.occupation }}">{{ occupation.occupation }} - {{ occupation.monthly_income }} zł</option>
@@ -20,8 +26,11 @@
     </select><br>
 <input type="submit" value="Remove" name="remove">
 </form>
-<h3>Add new income</h3>
-<form method="post">{% csrf_token %}
+    <hr>
+<h4>Add new income</h4>
+    <hr>
+<form method="post" class="form-group" style="display: inline-block; text-align: justify; width: 200px">
+    {% csrf_token %}
     Occupation:
     <select name="add_occupation">
         <option value="">-----</option>

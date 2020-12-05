@@ -3,10 +3,11 @@
     <title>Client Details</title>
     {% endblock %}
 {% block content %}
-<h1>Client details: {{ client.first_name }} {{ client.last_name }}</h1>
+    <hr>
+<h2 style="text-align: center">Client details: {{ client.first_name }} {{ client.last_name }}</h2>
+    <hr>
 
-
- <table style="width:100%">
+ <table class="table" style="background: rgba(230,233,235,0.62)">
   <tr>
     <th>First Name</th>
     <th>Last Name</th>
@@ -65,8 +66,8 @@
   </tr>
 </table><br><br>
 
-<h3>Current Loans (only given by our company)</h3>
-<table style="width:100%">
+<h2 style="text-align: center">Current Loans (only given by our company)</h2>
+<table class="table" style="background: rgba(230,233,235,0.62)">
 
   <tr>
     <th>Bank</th>
@@ -100,10 +101,10 @@
 {% endfor %}
 </table><br><br>
 
-<h3>News</h3>
+<h2 style="text-align: center">News</h2>
 
 
- <table style="width:100%">
+ <table class="table" style="background: rgba(230,233,235,0.62)" >
  <tr>
      <th>Comment</th>
      <th>Date</th>
