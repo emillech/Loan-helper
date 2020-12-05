@@ -3,67 +3,90 @@
     <title>Client list</title>
     {% endblock %}
 {% block content %}
-<h1>Client List</h1>
+<h2 style="text-align: center">Client List</h2>
+    <hr>
 
-<form action="" method="GET">
-<select name="order">
-    <option name="">-----</option>
-    <option name="first_name">First Name</option>
-    <option name="last_name">Last Name</option>
-    <option name="date_created">Date Created</option>
-    <option name="status">Status</option>
-</select>
-    <input type="submit" name="sort" value="Sort">
-</form><br>
+<div style="display: flex; justify-content: space-between">
+    <form action="" method="GET">
+    <select name="order">
+        <option name="">-----</option>
+        <option name="first_name">First Name</option>
+        <option name="last_name">Last Name</option>
+        <option name="date_created">Date Created</option>
+        <option name="status">Status</option>
+    </select>
+        <input type="submit" name="sort" value="Sort">
+    </form><br>
 
-<form action="" method="GET">
-    <input type="text" name="data_search">
-    <input type="submit" name="search" value="Search">
-</form>
+    <form action="" method="GET">
+        <input type="text" name="data_search">
+        <input type="submit" name="search" value="Search">
+    </form>
+</div>
 
+     <table class="table">
 
-     <table style="width:100%">
-
-  <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Phone Number</th>
-    <th>Email</th>
-    <th>Marital Status</th>
-    <th>Address</th>
-    <th>Occupation</th>
-    <th>Monthly Income</th>
-    <th>Broker</th>
-    <th>Current status</th>
-    <th>Date created</th>
-    <th>Details</th>
-  </tr>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone Number</th>
+            <th>Email</th>
+            <th>Marital Status</th>
+            <th>Address</th>
+            <th>Occupation</th>
+            <th>Monthly Income[zł]</th>
+            <th>Broker</th>
+            <th>Current status</th>
+            <th>Date created</th>
+            <th>Details</th>
+          </tr>
        {% for client in object_list %}
-  <tr>
+          <tr>
+            <td>{{ client.first_name }}</td>
+            <td>{{ client.last_name }}</td>
+            <td>{{ client.phone_number }}</td>
+            <td>{{ client.email }}</td>
+            <td>{{ client.get_marital_status_display }}</td>
+            <td>{{ client.address }}</td>
+              <td>
+                    {% for occupation in client.clientoccupation_set.all %}
+                    <li>{{ occupation.occupation }}</li>
+                    {% endfor %}
+              </td>
+              <td>
+                    {% for income in client.clientoccupation_set.all %}
+                    <li>{{ income.monthly_income }}</li>
+                    {% endfor %}
+              </td>
+            <td>{{ client.broker }}</td>
+            <td>{{ client.get_current_status_display }}</td>
+            <td>{{ client.date_created }}</td>
+            <td><a href="/client_details/{{ client.id }}"> <input type="button" value="Click"></a></td>
+          </tr>
+             {% empty %}
+            <li>No clients yet.</li>
+        {% endfor %}
+     </table>
 
-    <td>{{ client.first_name }}</td>
-    <td>{{ client.last_name }}</td>
-    <td>{{ client.phone_number }}</td>
-    <td>{{ client.email }}</td>
-    <td>{{ client.get_marital_status_display }}</td>
-    <td>{{ client.address }}</td>
-      <td>
-            {% for occupation in client.clientoccupation_set.all %}
-            <li>{{ occupation.occupation }}</li>
-            {% endfor %}
-      </td>
-      <td>
-            {% for income in client.clientoccupation_set.all %}
-            <li>{{ income.monthly_income }}</li>
-            {% endfor %}
-      </td>
-    <td>{{ client.broker }}</td>
-    <td>{{ client.get_current_status_display }}</td>
-    <td>{{ client.date_created }}</td>
-    <td><a href="/client_details/{{ client.id }}"> <input type="button" value="Click"></a></td>
-  </tr>
-     {% empty %}
-    <li>No clients yet.</li>
-{% endfor %}
-</table><br><br>
+{% if is_paginated %}
+  <ul class="pagination justify-content-center">
+    {% if page_obj.has_previous %}
+      <li><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span class="page-link">&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span class="page-link">&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
 {% endblock %}

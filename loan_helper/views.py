@@ -43,6 +43,7 @@ class SuccessfulLoanCreate(CreateView):
 class ClientListView(ListView):
     model = Client
     ordering = 'date_created'
+    paginate_by = 15
 
     def get_context_data(self, **kwargs):
         context = super(ClientListView, self).get_context_data(**kwargs)
@@ -91,6 +92,7 @@ class ClientListView(ListView):
 class BrokerListView(ListView):
     model = Broker
     ordering = ['name']
+    paginate_by = 15
 
 
 class BankListView(ListView):
