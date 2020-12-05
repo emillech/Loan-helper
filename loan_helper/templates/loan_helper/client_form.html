@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add Client</title>
-</head>
-<body>
+{% extends "base_form.html" %}
+    {% block title %}
+    <title>Add Broker</title>
+    {% endblock %}
+{% block content %}
 <h1>Add Client</h1>
 <form method="post">{% csrf_token %}
     {{ form.as_ul }}
     <input type="submit" value="Add">
 </form>
-
-</body>
-</html>
+{% endblock %}
