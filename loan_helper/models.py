@@ -16,7 +16,8 @@ CURRENT_STATUS = (
     (4, 'Offer'),
     (5, "Analysis in progress"),
     (6, "Negative decision"),
-    (7, "Positive decision")
+    (7, "Positive decision"),
+    (8, "Client resign")
 )
 
 OCCUPATION = (

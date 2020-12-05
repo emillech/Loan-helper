@@ -37,7 +37,7 @@ class BankCreate(CreateView):
 class SuccessfulLoanCreate(CreateView):
     model = SuccessfulLoan
     fields = '__all__'
-    success_url = '/all_successful_loans/'
+    success_url = '/all_loans/'
 
 
 class ClientListView(ListView):
