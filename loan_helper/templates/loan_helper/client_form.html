@@ -1,11 +1,13 @@
 {% extends "base_form.html" %}
     {% block title %}
-    <title>Add Client</title>
+    <title>Client</title>
     {% endblock %}
 {% block content %}
-<h1>Add Client</h1>
-<form method="post">{% csrf_token %}
+<h2 class="">Client details</h2>
+    <hr>
+    <form method="post" class="form-group" style="display: inline-block; text-align: justify; width: 200px">
+        {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Add">
+    <input type="submit" value="Submit">
 </form>
 {% endblock %}
