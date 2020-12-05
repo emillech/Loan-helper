@@ -149,6 +149,7 @@ class ClientDetailsView(View):
         change_status = request.POST.get('change_status')
         new_status = request.POST.get('new_status')
         delete_client = request.POST.get('delete_client')
+        comment_id = request.POST.get('comment_id')
 
         if comment and add_new_comment:
             Comment.objects.create(text=comment, client_id=client_id)
@@ -174,7 +175,9 @@ class ClientDetailsView(View):
             return redirect('/all_clients/')
 
         if delete_comment:
-            pass
+            comment_to_delete = Comment(id=comment_id)
+            comment_to_delete.delete()
+            return render(request, 'client_details.html', ctx)
 
         return render(request, 'client_details.html', ctx)
 
