@@ -5,7 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView, FormView
 from django.urls import reverse_lazy
 from loan_helper.models import Client, Broker, Comment, Occupation, ClientOccupation, Bank, SuccessfulLoan, \
-    CURRENT_STATUS
+    CURRENT_STATUS, OCCUPATION
 from loan_helper.forms import AddClientForm, UpdateClientForm
 from django.db.models import Q
 
@@ -235,7 +235,8 @@ class ClientOccupationCreate(View):
 
         ctx = {
             'client': client,
-            'client_occupation': client_occupation
+            'client_occupation': client_occupation,
+            'occupation': OCCUPATION
         }
 
         return render(request, 'income.html', ctx)
@@ -246,7 +247,8 @@ class ClientOccupationCreate(View):
 
         ctx = {
             'client': client,
-            'client_occupation': client_occupation
+            'client_occupation': client_occupation,
+            'occupation': OCCUPATION
         }
 
         add_occupation = request.POST.get('add_occupation')
@@ -256,38 +258,17 @@ class ClientOccupationCreate(View):
         remove_occupation = request.POST.get('remove_occupation')
 
         if add:
-            chosen_job = ''
-            if add_occupation == "1":
-                chosen_job = Occupation(occupation=1)
-                chosen_job.save()
-            elif add_occupation == "2":
-                chosen_job = Occupation(occupation=2)
-                chosen_job.save()
-            elif add_occupation == "3":
-                chosen_job = Occupation(occupation=3)
-                chosen_job.save()
-            elif add_occupation == "4":
-                chosen_job = Occupation(occupation=4)
-                chosen_job.save()
+            int(add_occupation)
+            chosen_job = Occupation(occupation=add_occupation)
+            chosen_job.save()
             ClientOccupation.objects.create(client=client, occupation=chosen_job, monthly_income=income)
 
         # pomyslec co tu zrobic, gdy beda dwa takie same dochody, sytuacja raczej niemozliwa, ale kod sie wyjebie
         if remove:
-            if remove_occupation == "Small Business":
-                job = client.income.get(occupation=3)
-                client_job = ClientOccupation.objects.filter(client=client, occupation=job)
-                client_job.delete()
-            elif remove_occupation == "Mandate contract":
-                job = client.income.get(occupation=2)
-                client_job = ClientOccupation.objects.filter(client=client, occupation=job)
-                client_job.delete()
-            elif remove_occupation == "Employment contract":
-                job = client.income.get(occupation=1)
-                client_job = ClientOccupation.objects.filter(client=client, occupation=job)
-                client_job.delete()
-            elif remove_occupation == "Pension":
-                job = client.income.get(occupation=4)
-                client_job = ClientOccupation.objects.filter(client=client, occupation=job)
-                client_job.delete()
+            for key, item in dict(OCCUPATION).items():
+                if remove_occupation == item:
+                    job = client.income.get(occupation=key)
+                    client_job = ClientOccupation.objects.filter(client=client, occupation=job)
+                    client_job.delete()
 
         return render(request, 'income.html', ctx)

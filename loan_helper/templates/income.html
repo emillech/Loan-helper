@@ -26,10 +26,10 @@
 <form method="post">{% csrf_token %}
     Occupation:
     <select name="add_occupation">
-        <option value="1">Employment contract</option>
-        <option value="2">Mandate contract</option>
-        <option value="3">Small business</option>
-        <option value="4">Pension</option>
+        <option value="">-----</option>
+        {% for key, item in occupation %}
+        <option value="{{ key }}">{{ item }}</option>
+        {% endfor %}
     </select><br>
     Monthly income: <input name="income" type="number"><br>
     <input type="submit" value="Add" name="add">
