@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+{% extends "base_list.html" %}
+    {% block title %}
     <title>Client Details</title>
-</head>
-<body>
-<a href="/"> <input type="button" value="Index"></a>
-<a href="/all_clients/"> <input type="button" value="Clients List"></a>
-<a href="/all_banks/"> <input type="button" value="Banks List"></a>
-<a href="/all_brokers/"> <input type="button" value="Brokers List"></a>
-<a href="/all_loans/"> <input type="button" value="Loans List"></a>
-
+    {% endblock %}
+{% block content %}
 <h1>Client details: {{ client.first_name }} {{ client.last_name }}</h1>
 
 
@@ -137,5 +129,4 @@
     <textarea name="comment" type="text"></textarea>
     <p><input type="submit" value="Add new comment" name="add_new_comment"></p>
 </form>
-</body>
-</html>
+{% endblock %}
