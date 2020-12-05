@@ -10,8 +10,32 @@
 </head>
 <body class="bg-light">
     <h1 class="text-md-center bg-dark text-light" >LOAN HELPER</h1>
-    {% block content %}
-    {% endblock %}
+        <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <div class="card text-white bg-light mb-3" style="margin: 20px; width: 15rem; display: inline-block">
+                    <div>
+                        <a href="/add_client/" class="list-group-item list-group-item-action" style="">Add Client</a>
+                        <a href="/add_broker/" class="list-group-item list-group-item-action">Add Broker</a>
+                        <a href="/add_bank/" class="list-group-item list-group-item-action">Add Bank</a>
+                        <a href="/add_loan/" class="list-group-item list-group-item-action">Add Successful Loan</a>
+                        <a href="/all_clients/" class="list-group-item list-group-item-action">Show Clients List</a>
+                        <a href="/all_brokers/" class="list-group-item list-group-item-action">Show Broker List</a>
+                        <a href="/all_banks/" class="list-group-item list-group-item-action">Show Bank List</a>
+                        <a href="/all_loans/" class="list-group-item list-group-item-action">Show Successful Loan list</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm">
+                <div class="text-dark text-md-center" style="display: inline-block">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

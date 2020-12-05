@@ -1,11 +1,11 @@
 {% extends "base_form.html" %}
     {% block title %}
-    <title>Add Broker</title>
+    <title>Add Client</title>
     {% endblock %}
 {% block content %}
 <h1>Add Client</h1>
 <form method="post">{% csrf_token %}
-    {{ form.as_ul }}
+    {{ form.as_p }}
     <input type="submit" value="Add">
 </form>
 {% endblock %}
