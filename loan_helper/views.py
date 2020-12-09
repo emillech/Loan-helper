@@ -58,28 +58,32 @@ class ClientCreate(LoginRequiredMixin, CreateView):
     login_url = '/login/'
 
 
-class BrokerCreate(CreateView):
+class BrokerCreate(LoginRequiredMixin, CreateView):
     model = Broker
     fields = '__all__'
     success_url = '/all_brokers/'
+    login_url = '/login/'
 
 
-class BankCreate(CreateView):
+class BankCreate(LoginRequiredMixin, CreateView):
     model = Bank
     fields = '__all__'
     success_url = '/all_banks/'
+    login_url = '/login/'
 
 
-class SuccessfulLoanCreate(CreateView):
+class SuccessfulLoanCreate(LoginRequiredMixin, CreateView):
     model = SuccessfulLoan
     fields = '__all__'
     success_url = '/all_loans/'
+    login_url = '/login/'
 
 
-class ClientListView(ListView):
+class ClientListView(LoginRequiredMixin, ListView):
     model = Client
     ordering = 'date_created'
     paginate_by = 15
+    login_url = '/login/'
 
     def get_context_data(self, **kwargs):
         context = super(ClientListView, self).get_context_data(**kwargs)
@@ -125,21 +129,24 @@ class ClientListView(ListView):
         return object_list
 
 
-class BrokerListView(ListView):
+class BrokerListView(LoginRequiredMixin, ListView):
     model = Broker
     ordering = ['name']
     paginate_by = 15
+    login_url = '/login/'
 
 
-class BankListView(ListView):
+class BankListView(LoginRequiredMixin, ListView):
     model = Bank
     ordering = ['name']
+    login_url = '/login/'
 
 
-class SuccessfulLoanListView(ListView):
+class SuccessfulLoanListView(LoginRequiredMixin, ListView):
     model = SuccessfulLoan
     ordering = ['-date_created']
     paginate_by = 15
+    login_url = '/login/'
 
     def get_ordering(self):
         order = self.request.GET.get('order')
@@ -159,7 +166,8 @@ class SuccessfulLoanListView(ListView):
                 return ordering
 
 
-class ClientDetailsView(View):
+class ClientDetailsView(LoginRequiredMixin, View):
+    login_url = '/login/'
 
     def get(self, request, client_id):
         client = Client.objects.get(id=client_id)
@@ -221,7 +229,9 @@ class ClientDetailsView(View):
         return render(request, 'client_details.html', ctx)
 
 
-class BrokerDetailsView(View):
+class BrokerDetailsView(LoginRequiredMixin, View):
+    login_url = '/login/'
+
     def get(self, request, broker_id):
         broker = Broker.objects.get(id=broker_id)
         all_clients = Client.objects.filter(broker=broker)
@@ -239,10 +249,11 @@ class BrokerDetailsView(View):
         return render(request, 'broker_details.html')
 
 
-class ClientUpdate(UpdateView):
+class ClientUpdate(LoginRequiredMixin, UpdateView):
     model = Client
     pk_url_kwarg = 'pk'
     form_class = UpdateClientForm
+    login_url = '/login/'
 
     def form_valid(self, form):
         """If the form is valid, redirect to the supplied URL."""
@@ -251,10 +262,11 @@ class ClientUpdate(UpdateView):
         return HttpResponseRedirect(f'/client_details/{client_id}')
 
 
-class BrokerUpdate(UpdateView):
+class BrokerUpdate(LoginRequiredMixin, UpdateView):
     model = Broker
     pk_url_kwarg = 'pk'
     fields = '__all__'
+    login_url = '/login/'
 
     def form_valid(self, form):
         """If the form is valid, redirect to the supplied URL."""
@@ -263,14 +275,17 @@ class BrokerUpdate(UpdateView):
         return HttpResponseRedirect(f'/client_details/{broker_id}')
 
 
-class LoanUpdate(UpdateView):
+class LoanUpdate(LoginRequiredMixin, UpdateView):
     model = SuccessfulLoan
     pk_url_kwarg = 'pk'
     fields = '__all__'
     success_url = '/all_loans/'
+    login_url = '/login/'
 
 
-class ClientOccupationCreate(View):
+class ClientOccupationCreate(LoginRequiredMixin, View):
+    login_url = '/login/'
+
     def get(self, request, client_id):
         client = Client.objects.get(id=client_id)
         client_occupation = ClientOccupation.objects.filter(client=client)
