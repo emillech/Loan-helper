@@ -158,3 +158,5 @@ def test_show_broker_details(django_client, new_broker):
 
     assert response.status_code == 200
     assert 'Company' in str(response.context['broker'])
+
+

@@ -25,11 +25,7 @@ class LoginView(FormView):
         if user:
             login(self.request, user)
             return super().form_valid(form)
-        # Wykona nie na formularzu add_error(None, String) powoduje, że zostanie dodany błąd
-        # nie związany z żadnym polem formularza, przydatne w przypadku, błąd jest związany
-        # wieloma polami. Podanie add_error z pierwszym parametrem stringowym powoduje, że dany
-        # błąd zostanie dodany do kola o takiej nazwie.
-        form.add_error(None, "Zły login lub hasło")
+        form.add_error(None, "Invalid login or password")
         return super().form_invalid(form)
 
 
