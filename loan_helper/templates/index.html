@@ -7,8 +7,16 @@
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 <body class="bg-light">
-
-    <h1 class="text-md-center bg-dark text-light" >LOAN HELPER</h1>
+    <div class="text-md-center bg-dark text-light">
+    <h1 style="display: flex; justify-content: center">LOAN HELPER</h1>
+    <p style="display: flex; justify-content: right">Hello, {{ user }}</p>
+    </div>
+    <div style="display: flex; justify-content: right">
+    <a href="/logout/" class="list-group-item list-group-item-action"
+       style="display: inline-block; text-align: center; width: 100px">
+        Logout
+    </a>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-sm">

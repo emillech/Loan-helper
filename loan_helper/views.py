@@ -1,3 +1,5 @@
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views import View
@@ -6,20 +8,54 @@ from django.views.generic import ListView, FormView
 from django.urls import reverse_lazy
 from loan_helper.models import Client, Broker, Comment, Occupation, ClientOccupation, Bank, SuccessfulLoan, \
     CURRENT_STATUS, OCCUPATION
-from loan_helper.forms import AddClientForm, UpdateClientForm
+from loan_helper.forms import AddClientForm, UpdateClientForm, LoginForm
 from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+class LoginView(FormView):
+    form_class = LoginForm
+    template_name = "login.html"
+    success_url = "/"
+
+    def form_valid(self, form):
+        username = form.cleaned_data["login"]
+        password = form.cleaned_data["password"]
+        user = authenticate(self.request, username=username, password=password)
+        if user:
+            login(self.request, user)
+            return super().form_valid(form)
+        # Wykona nie na formularzu add_error(None, String) powoduje, że zostanie dodany błąd
+        # nie związany z żadnym polem formularza, przydatne w przypadku, błąd jest związany
+        # wieloma polami. Podanie add_error z pierwszym parametrem stringowym powoduje, że dany
+        # błąd zostanie dodany do kola o takiej nazwie.
+        form.add_error(None, "Zły login lub hasło")
+        return super().form_invalid(form)
+
+
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect("/")
 
 
 class IndexView(View):
 
     def get(self, request):
-        return render(request, "index.html")
+        user = request.user
+        if user.is_authenticated:
+            user = User.objects.get(username='root')
+        else:
+            user = 'Anonymous'
+
+        return render(request, "index.html", {'user': user})
 
 
-class ClientCreate(CreateView):
+class ClientCreate(LoginRequiredMixin, CreateView):
     model = Client
     success_url = '/all_clients/'
     form_class = AddClientForm
+    login_url = '/login/'
 
 
 class BrokerCreate(CreateView):

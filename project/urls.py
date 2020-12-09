@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from loan_helper.views import IndexView, ClientCreate, BrokerCreate, ClientDetailsView, ClientListView, ClientUpdate, \
     BankCreate, SuccessfulLoanCreate, BrokerListView, BankListView, SuccessfulLoanListView, ClientOccupationCreate, \
-    BrokerDetailsView, BrokerUpdate, LoanUpdate
+    BrokerDetailsView, BrokerUpdate, LoanUpdate, LoginView, LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', LoginView.as_view()),
+    path('logout/', LogoutView.as_view()),
     path('', IndexView.as_view()),
     path('add_client/', ClientCreate.as_view()),
     path('add_broker/', BrokerCreate.as_view()),
