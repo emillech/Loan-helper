@@ -1,11 +1,21 @@
 from unittest.mock import patch
 import pytest
+from django.contrib.auth.models import User
 from django.test import Client as Django_Client
 from loan_helper.models import Client, Broker, Occupation, ClientOccupation, Bank, SuccessfulLoan
 
 
 @pytest.mark.django_db
 def test_add_one_client_to_db(django_client, new_broker):
+    User.objects.create_superuser('admin', 'admin@admin.pl', 'admin')
+    assert User.objects.count() == 1
+
+    django_client.post(
+        "/login/", {
+            'login': 'admin',
+            'password': 'admin'
+        })
+
     clients_before = Client.objects.count()
     assert clients_before == 0
 
@@ -33,6 +43,14 @@ def test_add_one_client_to_db(django_client, new_broker):
 
 @pytest.mark.django_db
 def test_add_one_broker_to_db(django_client):
+    User.objects.create_superuser('admin', 'admin@admin.pl', 'admin')
+    assert User.objects.count() == 1
+
+    django_client.post(
+        "/login/", {
+            'login': 'admin',
+            'password': 'admin'
+        })
     brokers_before = Broker.objects.count()
     assert brokers_before == 0
 
@@ -53,6 +71,15 @@ def test_add_one_broker_to_db(django_client):
 
 @pytest.mark.django_db
 def test_add_one_bank_to_db(django_client):
+    User.objects.create_superuser('admin', 'admin@admin.pl', 'admin')
+    assert User.objects.count() == 1
+
+    django_client.post(
+        "/login/", {
+            'login': 'admin',
+            'password': 'admin'
+        })
+
     banks_before = Bank.objects.count()
     assert banks_before == 0
 
@@ -71,6 +98,15 @@ def test_add_one_bank_to_db(django_client):
 
 @pytest.mark.django_db
 def test_add_one_loan_to_db(django_client, new_client, new_broker, new_bank):
+    User.objects.create_superuser('admin', 'admin@admin.pl', 'admin')
+    assert User.objects.count() == 1
+
+    django_client.post(
+        "/login/", {
+            'login': 'admin',
+            'password': 'admin'
+        })
+
     loans_before = SuccessfulLoan.objects.count()
     assert loans_before == 0
 
@@ -104,6 +140,15 @@ def test_add_one_loan_to_db(django_client, new_client, new_broker, new_bank):
 
 @pytest.mark.django_db
 def test_show_clients_list(django_client, new_client):
+    User.objects.create_superuser('admin', 'admin@admin.pl', 'admin')
+    assert User.objects.count() == 1
+
+    django_client.post(
+        "/login/", {
+            'login': 'admin',
+            'password': 'admin'
+        })
+
     response = django_client.get("/all_clients/", {})
 
     assert response.status_code == 200
@@ -113,6 +158,15 @@ def test_show_clients_list(django_client, new_client):
 
 @pytest.mark.django_db
 def test_show_brokers_list(django_client, new_broker):
+    User.objects.create_superuser('admin', 'admin@admin.pl', 'admin')
+    assert User.objects.count() == 1
+
+    django_client.post(
+        "/login/", {
+            'login': 'admin',
+            'password': 'admin'
+        })
+
     response = django_client.get("/all_brokers/", {})
 
     assert response.status_code == 200
@@ -122,6 +176,15 @@ def test_show_brokers_list(django_client, new_broker):
 
 @pytest.mark.django_db
 def test_show_banks_list(django_client, new_bank):
+    User.objects.create_superuser('admin', 'admin@admin.pl', 'admin')
+    assert User.objects.count() == 1
+
+    django_client.post(
+        "/login/", {
+            'login': 'admin',
+            'password': 'admin'
+        })
+
     response = django_client.get("/all_banks/", {})
 
     assert response.status_code == 200
@@ -131,6 +194,15 @@ def test_show_banks_list(django_client, new_bank):
 
 @pytest.mark.django_db
 def test_show_loans_list(django_client, new_loan):
+    User.objects.create_superuser('admin', 'admin@admin.pl', 'admin')
+    assert User.objects.count() == 1
+
+    django_client.post(
+        "/login/", {
+            'login': 'admin',
+            'password': 'admin'
+        })
+
     response = django_client.get("/all_loans/", {})
 
     assert response.status_code == 200
@@ -140,6 +212,15 @@ def test_show_loans_list(django_client, new_loan):
 
 @pytest.mark.django_db
 def test_show_client_details(django_client, new_client):
+    User.objects.create_superuser('admin', 'admin@admin.pl', 'admin')
+    assert User.objects.count() == 1
+
+    django_client.post(
+        "/login/", {
+            'login': 'admin',
+            'password': 'admin'
+        })
+
     client = Client.objects.get(first_name="Emil")
     assert Client.objects.count() == 1
 
@@ -151,6 +232,15 @@ def test_show_client_details(django_client, new_client):
 
 @pytest.mark.django_db
 def test_show_broker_details(django_client, new_broker):
+    User.objects.create_superuser('admin', 'admin@admin.pl', 'admin')
+    assert User.objects.count() == 1
+
+    django_client.post(
+        "/login/", {
+            'login': 'admin',
+            'password': 'admin'
+        })
+
     broker = Broker.objects.get(name="Company")
     assert Broker.objects.count() == 1
 
