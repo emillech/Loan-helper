@@ -316,7 +316,7 @@ class ClientOccupationCreate(LoginRequiredMixin, View):
             chosen_job.save()
             ClientOccupation.objects.create(client=client, occupation=chosen_job, monthly_income=income)
 
-        # pomyslec co tu zrobic, gdy beda dwa takie same dochody, sytuacja raczej niemozliwa, ale kod sie wyjebie
+        # TODO: naprawić błąd, kod sie wykrzacza jak chcemy usunąć dwa takie same dochody
         if remove:
             for key, item in dict(OCCUPATION).items():
                 if remove_occupation == item:
