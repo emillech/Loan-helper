@@ -7,6 +7,14 @@ from loan_helper.models import Client, Broker, Occupation, ClientOccupation, Ban
 
 @pytest.mark.django_db
 def test_add_one_client_to_db(django_client, new_broker):
+    """
+    This function allows to test adding new client to database. It creates super_user to log in.
+
+    :param django_client: Client as Django_Client
+    :param new_broker: Broker
+    :return: None
+    """
+
     User.objects.create_superuser('admin', 'admin@admin.pl', 'admin')
     assert User.objects.count() == 1
 
@@ -43,6 +51,13 @@ def test_add_one_client_to_db(django_client, new_broker):
 
 @pytest.mark.django_db
 def test_add_one_broker_to_db(django_client):
+    """
+    This function allows to test adding new broker to database. It creates super_user to log in.
+
+    :param django_client: Client as Django_Client
+    :return: None
+    """
+
     User.objects.create_superuser('admin', 'admin@admin.pl', 'admin')
     assert User.objects.count() == 1
 
@@ -71,6 +86,13 @@ def test_add_one_broker_to_db(django_client):
 
 @pytest.mark.django_db
 def test_add_one_bank_to_db(django_client):
+    """
+    This function allows to test adding new bank to database. It creates super_user to log in.
+
+    :param django_client: Client as Django_Client
+    :return: None
+    """
+
     User.objects.create_superuser('admin', 'admin@admin.pl', 'admin')
     assert User.objects.count() == 1
 
@@ -98,6 +120,16 @@ def test_add_one_bank_to_db(django_client):
 
 @pytest.mark.django_db
 def test_add_one_loan_to_db(django_client, new_client, new_broker, new_bank):
+    """
+    This function allows to test adding new loan to database. It creates super_user to log in.
+
+    :param django_client: Client as Django_Client
+    :param new_client: Client
+    :param new_broker: Broker
+    :param new_bank: Bank
+    :return: None
+    """
+
     User.objects.create_superuser('admin', 'admin@admin.pl', 'admin')
     assert User.objects.count() == 1
 
@@ -140,6 +172,14 @@ def test_add_one_loan_to_db(django_client, new_client, new_broker, new_bank):
 
 @pytest.mark.django_db
 def test_show_clients_list(django_client, new_client):
+    """
+    This function allows to test showing all clients in list. It creates super_user to log in.
+
+    :param django_client: Client as Django_Client
+    :param new_client: Client
+    :return: None
+    """
+
     User.objects.create_superuser('admin', 'admin@admin.pl', 'admin')
     assert User.objects.count() == 1
 
@@ -158,6 +198,14 @@ def test_show_clients_list(django_client, new_client):
 
 @pytest.mark.django_db
 def test_show_brokers_list(django_client, new_broker):
+    """
+    This function allows to test showing all brokers in list. It creates super_user to log in.
+
+    :param django_client: Client as Django_Client
+    :param new_broker: Broker
+    :return: None
+    """
+
     User.objects.create_superuser('admin', 'admin@admin.pl', 'admin')
     assert User.objects.count() == 1
 
@@ -176,6 +224,14 @@ def test_show_brokers_list(django_client, new_broker):
 
 @pytest.mark.django_db
 def test_show_banks_list(django_client, new_bank):
+    """
+    This function allows to test showing all clients in list. It creates super_user to log in.
+
+    :param django_client: Client as Django_Client
+    :param new_bank: Bank
+    :return: None
+    """
+
     User.objects.create_superuser('admin', 'admin@admin.pl', 'admin')
     assert User.objects.count() == 1
 
@@ -194,6 +250,14 @@ def test_show_banks_list(django_client, new_bank):
 
 @pytest.mark.django_db
 def test_show_loans_list(django_client, new_loan):
+    """
+    This function allows to test showing all clients in list. It creates super_user to log in.
+
+    :param django_client: Client as Django_Client
+    :param new_loan: SuccessfulLoan
+    :return: None
+    """
+
     User.objects.create_superuser('admin', 'admin@admin.pl', 'admin')
     assert User.objects.count() == 1
 
@@ -212,6 +276,14 @@ def test_show_loans_list(django_client, new_loan):
 
 @pytest.mark.django_db
 def test_show_client_details(django_client, new_client):
+    """
+    This function allows to test showing client details. It creates super_user to log in.
+
+    :param django_client: Client as Django_Client
+    :param new_client: Client
+    :return: None
+    """
+
     User.objects.create_superuser('admin', 'admin@admin.pl', 'admin')
     assert User.objects.count() == 1
 
@@ -232,6 +304,14 @@ def test_show_client_details(django_client, new_client):
 
 @pytest.mark.django_db
 def test_show_broker_details(django_client, new_broker):
+    """
+    This function allows to test showing broker details. It creates super_user to log in.
+
+    :param django_client: Client as Django_Client
+    :param new_broker: Broker
+    :return: None
+    """
+
     User.objects.create_superuser('admin', 'admin@admin.pl', 'admin')
     assert User.objects.count() == 1
 
