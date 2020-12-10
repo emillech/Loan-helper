@@ -1,24 +1,25 @@
 {% extends "base_list.html" %}
-    {% block title %}
+{% block title %}
     <title>Loan list</title>
-    {% endblock %}
+{% endblock %}
 {% block content %}
-    <hr>
+<hr>
 <h2 style="text-align: center">Loan List</h2>
-    <hr>
+<hr>
 
 <div style="display: block; justify-content: space-between">
-<form action="" method="GET">
-<select name="order">
-    <option name="">-----</option>
-    <option name="client">Client</option>
-    <option name="bank">Bank</option>
-    <option name="newest">Newest</option>
-    <option name="oldest">Oldest</option>
-</select>
-    <input type="submit" name="sort" value="Sort">
-</form><br>
+    <form action="" method="GET">
+        <select name="order">
+            <option name="">-----</option>
+            <option name="client">Client</option>
+            <option name="bank">Bank</option>
+            <option name="newest">Newest</option>
+            <option name="oldest">Oldest</option>
+        </select>
+        <input type="submit" name="sort" value="Sort">
+    </form>
 </div>
+
 <table class="table" style="background: rgba(230,233,235,0.62)">
 
   <tr style="background: rgba(220,223,225,0.62)">

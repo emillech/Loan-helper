@@ -1,14 +1,14 @@
 {% extends "base_form.html" %}
-    {% block title %}
+{% block title %}
     <title>Loan</title>
-    {% endblock %}
+{% endblock %}
 
 {% block content %}
 <h2>Loan details</h2>
 <hr>
     <form method="post" class="form-group" style="display: inline-block; text-align: justify; width: 150px">
         {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit">
-</form>
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
 {% endblock %}

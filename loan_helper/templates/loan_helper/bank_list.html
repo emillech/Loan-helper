@@ -1,26 +1,25 @@
 {% extends "base_list.html" %}
-    {% block title %}
+{% block title %}
     <title>Bank list</title>
-    {% endblock %}
+{% endblock %}
+
 {% block content %}
 <hr>
 <h2 style="text-align: center">Bank List</h2>
-    <hr>
+<hr>
 <table class="table" style="background: rgba(230,233,235,0.62)">
 
   <tr style="background: rgba(220,223,225,0.62)">
     <th>Name</th>
     <th>Address</th>
-
   </tr>
        {% for bank in object_list %}
-  <tr>
-
-    <td>{{ bank.name }}</td>
-    <td>{{ bank.address }}</td>
-  </tr>
-     {% empty %}
-    <li>No banks yet.</li>
-{% endfor %}
+          <tr>
+            <td>{{ bank.name }}</td>
+            <td>{{ bank.address }}</td>
+          </tr>
+             {% empty %}
+            <li>No banks yet.</li>
+       {% endfor %}
 </table>
 {% endblock %}

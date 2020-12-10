@@ -1,11 +1,12 @@
 {% extends "base_list.html" %}
-    {% block title %}
+{% block title %}
     <title>Broker list</title>
-    {% endblock %}
+{% endblock %}
+
 {% block content %}
 <hr>
 <h2 style="text-align: center">Broker List</h2>
-    <hr>
+<hr>
 <table class="table" style="background: rgba(230,233,235,0.62)">
 
   <tr style="background: rgba(220,223,225,0.62)">
@@ -13,39 +14,40 @@
     <th>Phone Number</th>
     <th>Email</th>
     <th>Details</th>
-
   </tr>
+
        {% for broker in object_list %}
-  <tr>
+          <tr>
+            <td>{{ broker.name }}</td>
+            <td>{{ broker.phone_number }}</td>
+            <td>{{ broker.email }}</td>
+            <td><a href="/broker_details/{{ broker.id }}"> <input type="button" value="Click"></a></td>
+          </tr>
+             {% empty %}
+            <li>No brokers yet.</li>
+       {% endfor %}
 
-    <td>{{ broker.name }}</td>
-    <td>{{ broker.phone_number }}</td>
-    <td>{{ broker.email }}</td>
-    <td><a href="/broker_details/{{ broker.id }}"> <input type="button" value="Click"></a></td>
-  </tr>
-     {% empty %}
-    <li>No brokers yet.</li>
-{% endfor %}
-</table><br><br>
+</table>
+
     {% if is_paginated %}
-  <ul class="pagination justify-content-center">
-    {% if page_obj.has_previous %}
-      <li><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-    {% else %}
-      <li class="disabled"><span class="page-link">&laquo;</span></li>
+      <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+          <li><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><span class="page-link">&laquo;</span></li>
+        {% endif %}
+        {% for i in paginator.page_range %}
+          {% if page_obj.number == i %}
+            <li class="active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+          <li><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><span class="page-link">&raquo;</span></li>
+        {% endif %}
+      </ul>
     {% endif %}
-    {% for i in paginator.page_range %}
-      {% if page_obj.number == i %}
-        <li class="active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
-      {% else %}
-        <li><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-      {% endif %}
-    {% endfor %}
-    {% if page_obj.has_next %}
-      <li><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-    {% else %}
-      <li class="disabled"><span class="page-link">&raquo;</span></li>
-    {% endif %}
-  </ul>
-{% endif %}
 {% endblock %}

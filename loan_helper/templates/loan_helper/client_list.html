@@ -1,23 +1,24 @@
 {% extends "base_list.html" %}
-    {% block title %}
+{% block title %}
     <title>Client list</title>
-    {% endblock %}
+{% endblock %}
+
 {% block content %}
-    <hr>
+<hr>
 <h2 style="text-align: center">Client List</h2>
-    <hr>
+<hr>
 
 <div style="display: flex; justify-content: space-between">
     <form action="" method="GET">
-    <select name="order">
-        <option name="">-----</option>
-        <option name="first_name">First Name</option>
-        <option name="last_name">Last Name</option>
-        <option name="date_created">Date Created</option>
-        <option name="status">Status</option>
-    </select>
-        <input type="submit" name="sort" value="Sort">
-    </form><br>
+        <select name="order">
+            <option name="">-----</option>
+            <option name="first_name">First Name</option>
+            <option name="last_name">Last Name</option>
+            <option name="date_created">Date Created</option>
+            <option name="status">Status</option>
+        </select>
+            <input type="submit" name="sort" value="Sort">
+    </form>
 
     <form action="" method="GET">
         <input type="text" name="data_search">
@@ -66,7 +67,7 @@
           </tr>
              {% empty %}
             <li>No clients yet.</li>
-        {% endfor %}
+       {% endfor %}
      </table>
 
 {% if is_paginated %}
