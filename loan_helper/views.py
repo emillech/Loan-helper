@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView
@@ -10,6 +10,7 @@ from loan_helper.models import Client, Broker, Comment, Occupation, ClientOccupa
 from loan_helper.forms import AddClientForm, UpdateClientForm, LoginForm
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
+from loan_helper.utils import render_to_pdf
 
 
 class LoginView(FormView):
@@ -151,7 +152,7 @@ class ClientListView(LoginRequiredMixin, ListView):
                 ordering = 'last_name'
                 return ordering
             elif order == "Date Created":
-                ordering = 'date_created'
+                ordering = '-date_created'
                 return ordering
             elif order == "Status":
                 ordering = 'current_status'
@@ -448,3 +449,15 @@ class ClientOccupationCreate(LoginRequiredMixin, View):
                     client_job.delete()
 
         return render(request, 'income.html', ctx)
+
+
+class GeneratePdf(View):
+    def get(self, request, *args, **kwargs):
+        data = {
+             'today': 'aaa',
+             'amount': 39.99,
+             'customer_name': 'Cooper Mann',
+             'order_id': 1233434,
+        }
+        pdf = render_to_pdf('index.html', data)
+        return HttpResponse(pdf, content_type='application/pdf')
