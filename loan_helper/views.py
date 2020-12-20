@@ -11,6 +11,7 @@ from loan_helper.forms import AddClientForm, UpdateClientForm, LoginForm
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from loan_helper.utils import render_to_pdf
+from datetime import date
 
 
 class LoginView(FormView):
@@ -453,11 +454,35 @@ class ClientOccupationCreate(LoginRequiredMixin, View):
 
 class GeneratePdf(View):
     def get(self, request, *args, **kwargs):
-        data = {
-             'today': 'aaa',
-             'amount': 39.99,
-             'customer_name': 'Cooper Mann',
-             'order_id': 1233434,
+        clients = Client.objects.all()
+
+        ctx = {
+            'clients': clients
         }
-        pdf = render_to_pdf('index.html', data)
-        return HttpResponse(pdf, content_type='application/pdf')
+
+        return render(request, 'pdf/daily_report_data.html', ctx)
+
+    def post(self, request):
+        chosen_clients = request.POST.getlist('choice')
+        clients = []
+        client_data = {
+
+        }
+        today = date.today()
+        for client in chosen_clients:
+            client = Client.objects.get(id=client)
+            comments = Comment.objects.filter(client=client)
+            client_comments = []
+            client_data.update({f'{client} - {client.get_current_status_display()}': client_comments})
+            for comment in comments:
+                client_comments.append(f'{comment.text} - {comment.date_created.strftime("%b %d %Y %H:%M:%S")}')
+
+        ctx = {
+            'data': client_data,
+            'clients': clients,
+            'date': today
+        }
+
+        return render(request, 'pdf/daily_report.html', ctx)
+        # pdf = render_to_pdf('pdf/daily_report.html', ctx)
+        # return pdf
