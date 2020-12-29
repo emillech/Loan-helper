@@ -23,6 +23,7 @@ Like I write before, application allows to monitor progress of loans. Every cust
 ## Technologies
 * Python - version 3.7
 * Django - version 3.0.6
+* PostgreSQL - version 13.0
 * pytest - version 5.4.2
 * pytest-django - version 3.9.0
 * Faker - version 4.1,0
