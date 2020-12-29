@@ -1,49 +1,54 @@
-# Project Name
-> Here goes your awesome project description!
+# Loan helper
+> Simple web application that allows to monitor progress of customers loans.
 
 ## Table of contents
 * [General info](#general-info)
 * [Screenshots](#screenshots)
 * [Technologies](#technologies)
-* [Setup](#setup)
+* [Demo](#demo)
 * [Features](#features)
 * [Status](#status)
 * [Inspiration](#inspiration)
 * [Contact](#contact)
 
 ## General info
-Add more general information about project. What the purpose of the project is? Motivation?
+Like I write before, application allows to monitor progress of loans. Every customer has his own process, with hunderds of clients we can easy forget some informations e.g. what status that customer have or what offer from bank he got. Trello has great functions but for me that was not enough. With this app we can track customers, add coments, caluclate loans or generete report, not only for us but also for brokers who works with our company.
 
 ## Screenshots
-![Example screenshot](./img/screenshot.png)
+![Example screenshot](./img/Screenshot from 2020-12-29 18-49-36.png)
 
 ## Technologies
-* Tech 1 - version 1.0
-* Tech 2 - version 2.0
-* Tech 3 - version 3.0
+* Python - version 3.7
+* Django - version 3.0.6
+* pytest - version 5.4.2
+* pytest-django - version 3.9.0
+* Faker - version 4.1,0
+* pytz - version 2020.1
+* psycopg2-binary - version 2.8.6
+* xhtml2pdf - version 0.2.5
+* numpy - version 1.19.0
+* Bootstrap - version 4.5.3
+* Chart js - version 2.9.3
 
-## Setup
-Describe how to install / setup your local environement / add link to demo version.
 
-## Code Examples
-Show examples of usage:
-`put-your-code-here`
+## Demo
+I'm working on it.
 
 ## Features
 List of features ready and TODOs for future development
-* Awesome feature 1
-* Awesome feature 2
-* Awesome feature 3
+* Track customers progress
+* Calculate costs of loan
+* Generate reports
 
 To-do list:
-* Wow improvement to be done 1
-* Wow improvement to be done 2
+* Calculating creditworthiness
+* More statistics, grapghs and charts
 
 ## Status
-Project is: _in progress_, _finished_, _no longer continue_ and why?
+Project is: _finished_, but I may add new functions from to-do list
 
 ## Inspiration
-Add here credits. Project inspired by..., based on...
+This is my final project for Coders Lab bootcamp - Python Developer. I personally use this app in my current job. It helps me stay informed about all customers.
 
 ## Contact
-Created by [@flynerdpl](https://www.flynerd.pl/) - feel free to contact me!
+Created by Emil Lech (contact@emillech.com.pl) - feel free to contact me!
