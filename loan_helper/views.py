@@ -452,7 +452,7 @@ class ClientOccupationCreate(LoginRequiredMixin, View):
         return render(request, 'income.html', ctx)
 
 
-class GeneratePdf(View):
+class GenerateDetailedReport(View):
     def get(self, request, *args, **kwargs):
         clients = Client.objects.all()
 
@@ -483,6 +483,49 @@ class GeneratePdf(View):
             'date': today
         }
 
+        # pdf has issue with polish letters
         # return render(request, 'pdf/daily_report.html', ctx)
         pdf = render_to_pdf('pdf/daily_report.html', ctx)
         return pdf
+
+
+class GenerateBrokerReport(View):
+    def get(self, request, *args, **kwargs):
+        brokers = Broker.objects.all()
+
+        ctx = {
+            'brokers': brokers
+        }
+
+        return render(request, 'pdf/broker_report_data.html', ctx)
+
+    def post(self, request):
+        chosen_brokers = request.POST.getlist('choice')
+        today = date.today()
+        brokers_data = {
+
+        }
+
+        for broker in chosen_brokers:
+            broker = Broker.objects.get(id=broker)
+            clients = Client.objects.filter(broker=broker)
+            client_data = []
+            for client in clients:
+                loans = SuccessfulLoan.objects.filter(client=client)
+                loans_data = []
+                for loan in loans:
+                    loans_data.append(f'{loan.bank} - {loan.loan_amount_gross}')
+                if loans_data:
+                    client_data.append(f'{client} - {client.get_current_status_display()} - {loans_data} gross')
+                client_data.append(f'{client} - {client.get_current_status_display()}')
+            brokers_data.update({broker: client_data})
+
+        ctx = {
+            'date': today,
+            'data': brokers_data
+        }
+
+        # pdf has issue with polish letters
+        return render(request, 'pdf/daily_report.html', ctx)
+        # pdf = render_to_pdf('pdf/broker_report.html', ctx)
+        # return pdf
