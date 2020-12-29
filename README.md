@@ -45,7 +45,7 @@ List of features ready and TODOs for future development
 
 To-do list:
 * Calculating creditworthiness
-* More statistics, grapghs and charts
+* More statistics, graphs and charts
 
 ## Status
 Project is: _finished_, but I may add new functions from to-do list
