@@ -15,7 +15,7 @@
 Like I write before, application allows to monitor progress of loans. Every customer has his own process, with hunderds of clients we can easy forget some informations e.g. what status that customer have or what offer from bank he got. Trello has great functions but for me that was not enough. With this app we can track customers, add coments, caluclate loans or generete report, not only for us but also for brokers who works with our company.
 
 ## Screenshots
-![Example screenshot](./img/Screenshot from 2020-12-29 18-49-36.png)
+![Example screenshot](loan_helper/img/Screenshot from 2020-12-29 18-49-36.png)
 
 ## Technologies
 * Python - version 3.7
