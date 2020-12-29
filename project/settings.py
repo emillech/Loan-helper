@@ -79,7 +79,6 @@ DATABASES = {
         'HOST': '127.0.0.1',
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'loan_helper_2',
-        # 'NAME': 'city_financial',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
     }
