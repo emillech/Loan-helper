@@ -13,6 +13,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from loan_helper.utils import render_to_pdf
 from datetime import date
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 class LoginView(FormView):
@@ -453,7 +454,9 @@ class ClientOccupationCreate(LoginRequiredMixin, View):
         return render(request, 'income.html', ctx)
 
 
-class GenerateDetailedReport(View):
+class GenerateDetailedReport(LoginRequiredMixin, View):
+    login_url = '/login/'
+
     def get(self, request, *args, **kwargs):
         clients = Client.objects.all()
 
@@ -490,7 +493,9 @@ class GenerateDetailedReport(View):
         return pdf
 
 
-class GenerateBrokerReport(View):
+class GenerateBrokerReport(LoginRequiredMixin, View):
+    login_url = '/login/'
+
     def get(self, request, *args, **kwargs):
         brokers = Broker.objects.all()
 
@@ -532,7 +537,8 @@ class GenerateBrokerReport(View):
         # return pdf
 
 
-class LoanCalculator(View):
+class LoanCalculator(LoginRequiredMixin, View):
+    login_url = '/login/'
 
     def get(self, request):
         form = LoanCalculatorForm
@@ -552,8 +558,22 @@ class LoanCalculator(View):
 
         instalment = round(abs(np.pmt((interest_rate / 100) / 12, repayment_term, gross_amount)), 2)
 
+        total = round(instalment * repayment_term, 2)
+        cost = gross_amount - net_amount
+        plt_data = [net_amount, cost]
+        plt.pie(plt_data)
+        pie = plt.pie(plt_data)
+
         ctx = {
-            'instalment': instalment
+            'instalment': instalment,
+            'net_amount': net_amount,
+            'gross_amount': gross_amount,
+            'bank_charge': bank_charge,
+            'interest_rate': interest_rate,
+            'repayment_term': repayment_term,
+            'insurance': insurance,
+            'total': total,
+            'pie+chart': pie
         }
 
         return render(request, 'loan_calculator.html', ctx)

@@ -6,11 +6,59 @@
 {% block content %}
 <h2>Loan Calculator</h2>
 <hr>
+{% if not instalment %}
     <form method="post" class="form-group" style="display: inline-block; text-align: justify; width: 200px">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Submit">
     </form>
+{% else %}
+<h4>Loan terms</h4>
+<hr>
 
-{{ instalment }}
+<table class="table" style="background: rgba(230,233,235,0.62)">
+    <tr style="background: rgba(220,223,225,0.62)">
+        <th colspan="2">Terms</th>
+    </tr>
+    <tr>
+        <td>Net amount [zł]</td>
+        <td>{{ net_amount }}</td>
+    </tr>
+    <tr>
+        <td>Gross amount [zł]</td>
+        <td>{{ gross_amount }}</td>
+    </tr>
+    <tr>
+        <td>Bank charge [%]</td>
+        <td>{{ bank_charge }}</td>
+    </tr>
+    <tr>
+        <td>Interest rate [%]</td>
+        <td>{{ interest_rate }}</td>
+    </tr>
+    <tr>
+        <td>Repayment term [months]</td>
+        <td>{{ repayment_term }}</td>
+    </tr>
+    <tr>
+        <td>Insurance [zł]</td>
+        <td>{{ insurance }}</td>
+    </tr>
+</table>
+
+<table class="table" style="background: rgba(230,233,235,0.62)">
+    <tr>
+        <td>Instalment amount [zł]</td>
+        <td>{{ instalment }}</td>
+    </tr>
+    <tr>
+        <td>Total after repayment term [zł]</td>
+        <td>{{ total }}</td>
+    </tr>
+
+</table>
+
+{{ pie }}
+{% endif %}
+
 {% endblock %}
