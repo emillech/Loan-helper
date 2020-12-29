@@ -483,6 +483,6 @@ class GeneratePdf(View):
             'date': today
         }
 
-        return render(request, 'pdf/daily_report.html', ctx)
-        # pdf = render_to_pdf('pdf/daily_report.html', ctx)
-        # return pdf
+        # return render(request, 'pdf/daily_report.html', ctx)
+        pdf = render_to_pdf('pdf/daily_report.html', ctx)
+        return pdf

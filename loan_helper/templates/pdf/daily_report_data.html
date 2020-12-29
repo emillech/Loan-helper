@@ -8,6 +8,18 @@
 </head>
 <body class="bg-light">
 <h2 style="text-align: center">Choose clients to generate report</h2>
+<hr>
+
+            <div class="col-sm">
+                <div class="card text-white bg-light mb-3" style="margin: 20px; width: 15rem; display: inline-block">
+                    <div>
+                        <a href="/" class="list-group-item list-group-item-action" style="">Back to main</a>
+
+                    </div>
+                </div>
+            </div>
+
+
             <form method="post" class="form-group" style="display: inline-block; text-align: justify; width: 200px">
                 {% csrf_token %}
                 {% for client in clients %}
