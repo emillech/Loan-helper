@@ -7,11 +7,12 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView, FormView
 from loan_helper.models import Client, Broker, Comment, Occupation, ClientOccupation, Bank, SuccessfulLoan, \
     CURRENT_STATUS, OCCUPATION
-from loan_helper.forms import AddClientForm, UpdateClientForm, LoginForm
+from loan_helper.forms import AddClientForm, UpdateClientForm, LoginForm, LoanCalculatorForm
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from loan_helper.utils import render_to_pdf
 from datetime import date
+import numpy as np
 
 
 class LoginView(FormView):
@@ -529,3 +530,31 @@ class GenerateBrokerReport(View):
         return render(request, 'pdf/daily_report.html', ctx)
         # pdf = render_to_pdf('pdf/broker_report.html', ctx)
         # return pdf
+
+
+class LoanCalculator(View):
+
+    def get(self, request):
+        form = LoanCalculatorForm
+        ctx = {
+            'form': form
+        }
+        return render(request, 'loan_calculator.html', ctx)
+
+    def post(self, request):
+        net_amount = int(request.POST.get("net_amount"))
+        bank_charge = float(request.POST.get("bank_charge"))
+        interest_rate = float(request.POST.get("interest_rate"))
+        repayment_term = int(request.POST.get("repayment_term"))
+        insurance = float(request.POST.get("insurance"))
+
+        gross_amount = net_amount + (bank_charge / 100) * net_amount + insurance
+
+        instalment = round(abs(np.pmt((interest_rate / 100) / 12, repayment_term, gross_amount)), 2)
+
+        ctx = {
+            'instalment': instalment
+        }
+
+        return render(request, 'loan_calculator.html', ctx)
+
