@@ -13,7 +13,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from loan_helper.utils import render_to_pdf
 from datetime import date
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 class LoginView(FormView):
@@ -559,10 +558,10 @@ class LoanCalculator(LoginRequiredMixin, View):
         instalment = round(abs(np.pmt((interest_rate / 100) / 12, repayment_term, gross_amount)), 2)
 
         total = round(instalment * repayment_term, 2)
-        cost = gross_amount - net_amount
-        plt_data = [net_amount, cost]
-        plt.pie(plt_data)
-        pie = plt.pie(plt_data)
+        interest_cost = round(total - net_amount, 2)
+
+        labels = ["Net amount", "Interest cost"]
+        data = [net_amount, interest_cost]
 
         ctx = {
             'instalment': instalment,
@@ -573,7 +572,8 @@ class LoanCalculator(LoginRequiredMixin, View):
             'repayment_term': repayment_term,
             'insurance': insurance,
             'total': total,
-            'pie+chart': pie
+            'labels': labels,
+            'data': data,
         }
 
         return render(request, 'loan_calculator.html', ctx)
