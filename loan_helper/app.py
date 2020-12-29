@@ -1,6 +1,7 @@
 from faker import Faker
-from loan_helper.models import Client, Broker, Occupation, ClientOccupation, Bank, SuccessfulLoan
+from loan_helper.models import Client, Broker, Occupation, ClientOccupation, Bank, SuccessfulLoan, Comment
 import random
+import lorem
 
 fake = Faker()
 
@@ -89,8 +90,19 @@ def add_successful_loan():
         )
 
 
+def add_comments():
+    for _ in range(100):
+        all_clients = Client.objects.all()
+        client = random.choice(all_clients)
+        text = lorem.paragraph()
+        comment = Comment.objects.create(
+            text=text,
+            client=client
+        )
+
 # add_bank()
 # add_broker()
 # add_occupation()
 # add_client()
 # add_successful_loan()
+# add_comments()

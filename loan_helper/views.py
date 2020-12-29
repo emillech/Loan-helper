@@ -454,9 +454,17 @@ class ClientOccupationCreate(LoginRequiredMixin, View):
 
 
 class GenerateDetailedReport(LoginRequiredMixin, View):
+    """
+    A class used to represent a View that generates detailed reports.
+    """
+
     login_url = '/login/'
 
     def get(self, request, *args, **kwargs):
+        """
+        This method allows to pass context. It renders proper template.
+        """
+
         clients = Client.objects.all()
 
         ctx = {
@@ -466,6 +474,10 @@ class GenerateDetailedReport(LoginRequiredMixin, View):
         return render(request, 'pdf/daily_report_data.html', ctx)
 
     def post(self, request):
+        """
+        This method allows to generate detailed report in pdf.
+        """
+
         chosen_clients = request.POST.getlist('choice')
         clients = []
         client_data = {
@@ -493,9 +505,17 @@ class GenerateDetailedReport(LoginRequiredMixin, View):
 
 
 class GenerateBrokerReport(LoginRequiredMixin, View):
+    """
+    A class used to represent a View that generates broker reports.
+    """
+
     login_url = '/login/'
 
     def get(self, request, *args, **kwargs):
+        """
+        This method allows to pass context. It renders proper template.
+        """
+
         brokers = Broker.objects.all()
 
         ctx = {
@@ -505,6 +525,10 @@ class GenerateBrokerReport(LoginRequiredMixin, View):
         return render(request, 'pdf/broker_report_data.html', ctx)
 
     def post(self, request):
+        """
+        This method allows to generate detailed report in pdf.
+        """
+
         chosen_brokers = request.POST.getlist('choice')
         today = date.today()
         brokers_data = {
@@ -537,9 +561,17 @@ class GenerateBrokerReport(LoginRequiredMixin, View):
 
 
 class LoanCalculator(LoginRequiredMixin, View):
+    """
+    A class used to represent a Loan Calculator View. It allows to calculate instalment amount and shows interest costs.
+    """
+
     login_url = '/login/'
 
     def get(self, request):
+        """
+        This method allows to pass context. It gathers data to calculate proper values.
+        """
+
         form = LoanCalculatorForm
         ctx = {
             'form': form
@@ -547,6 +579,10 @@ class LoanCalculator(LoginRequiredMixin, View):
         return render(request, 'loan_calculator.html', ctx)
 
     def post(self, request):
+        """
+        This method allows to calculate instalment amount and interest costs. It also shows a pie chart with loan cost.
+        """
+
         net_amount = int(request.POST.get("net_amount"))
         bank_charge = float(request.POST.get("bank_charge"))
         interest_rate = float(request.POST.get("interest_rate"))
