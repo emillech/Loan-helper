@@ -21,7 +21,7 @@ Like I write before, application allows to monitor progress of loans. Every cust
 ![report](loan_helper/img/report.png)
 
 ## Technologies
-* Python - version 3.7
+* Python - version 3.6.9
 * Django - version 3.0.6
 * PostgreSQL - version 13.0
 * pytest - version 5.4.2
@@ -36,7 +36,7 @@ Like I write before, application allows to monitor progress of loans. Every cust
 
 
 ## Demo
-I'm working on it.
+You can use demo on heroku: https://protected-hamlet-03792.herokuapp.com/
 
 ## Features
 List of features ready and TODOs for future development
