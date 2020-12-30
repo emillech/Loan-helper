@@ -37,6 +37,8 @@ Like I write before, application allows to monitor progress of loans. Every cust
 
 ## Demo
 You can use demo on heroku: https://protected-hamlet-03792.herokuapp.com/
+Login: root
+Password: root
 
 ## Features
 List of features ready and TODOs for future development
