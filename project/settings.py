@@ -25,7 +25,7 @@ SECRET_KEY = '@7qqd8*rtuhfq##vo%qz*(=isq=^j&r%jx1dic%fhv+$55(u34'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['protected-hamlet-03792.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['protected-hamlet-03792.herokuapp.com', '127.0.0.1', '0.0.0.0']
 
 
 # Application definition
@@ -76,14 +76,19 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'HOST': '127.0.0.1',
+        # 'HOST': '127.0.0.1',
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': 'loan_helper_2',
+        # 'USER': 'postgres',
+        # 'PASSWORD': 'postgres',
+        'HOST': 'ec2-54-175-243-75.compute-1.amazonaws.com',
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'loan_helper_2',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'NAME': 'd7tpptcpj0sauu',
+        'PORT': 5432,
+        'USER': 'rfojhkeilkjsye',
+        'PASSWORD': '7e4ba6f7e00a7b10251864ae854d888e45381c7c92be67f6343fa4276edfce5e',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
