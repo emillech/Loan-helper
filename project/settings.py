@@ -74,21 +74,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        # 'HOST': '127.0.0.1',
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': 'loan_helper_2',
-        # 'USER': 'postgres',
-        # 'PASSWORD': 'postgres',
-        'HOST': 'ec2-54-175-243-75.compute-1.amazonaws.com',
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd7tpptcpj0sauu',
-        'PORT': 5432,
-        'USER': 'rfojhkeilkjsye',
-        'PASSWORD': '7e4ba6f7e00a7b10251864ae854d888e45381c7c92be67f6343fa4276edfce5e',
-    }
-}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -128,3 +114,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+try:
+    from project.local_settings import DATABASES
+except ModuleNotFoundError:
+    print("Brak konfiguracji bazy danych w pliku local_settings.py!")
+    print("Uzupełnij dane i spróbuj ponownie!")
+    exit(0)
